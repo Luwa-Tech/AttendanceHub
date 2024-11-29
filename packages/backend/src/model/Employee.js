@@ -13,7 +13,8 @@ const employeeSchema  = new mongoose.Schema({
 
     email: {
         required: true,
-        type: String
+        type: String,
+        unique: true
     },
 
     password: {
@@ -26,10 +27,10 @@ const employeeSchema  = new mongoose.Schema({
         type: String
     },
 
-    role: {
-        required: true,
-        type: [String],
-        default: ['worker']
+    roleId: {
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Role',
+        required: true
     },
 
     createdAt: {

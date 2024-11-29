@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import connectToDB from './config/dbConn.js';
 import cookieParser from 'cookie-parser';
+import globalErrorHandler from './middleware.js/globalErrorHandler.js';
 
 const server = express();
 const PORT = process.env.PORT;
@@ -14,6 +15,8 @@ server.use(cookieParser());
 server.use(express.static("public"));
 server.use(express.json());
 
+
+server.use(globalErrorHandler);
 
 mongoose.connection.once("open", () => {
     server.listen(process.env.PORT, () => {

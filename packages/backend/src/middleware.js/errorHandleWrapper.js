@@ -1,0 +1,19 @@
+import { CustomError } from "../utils/errors"
+
+const errorHandlerWrapper = (func) => {
+    return async (req, res, next) => {
+        try {
+            await func(req, res, next);
+        } catch (e) {
+            if (e instanceof CustomError) {
+                console.error(`Error occured: ${e.code}`);
+                res.status(400).json({ error: e.message, code: e.code, details: e.details })
+            } else {
+                console.error('Something else happened!', e);
+                res.status(500).json({ error: 'Internal Server Error' })
+            }
+        }
+    }
+};
+
+export default errorHandlerWrapper;

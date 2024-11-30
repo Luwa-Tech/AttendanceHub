@@ -1,7 +1,9 @@
 export class CustomError extends Error { };
 
+// add a status argument to every error type and use in wrapper
+
 export class InputError extends CustomError { 
-    constructor(message = 'Input Error', code, details = []) {
+    constructor(message = 'Input Error', code = 'invalid_input', details = []) {
         super(message);
         this.code = code;
         this.details = details;
@@ -9,8 +11,8 @@ export class InputError extends CustomError {
 };
 
 export class NotFoundError extends CustomError {
-    constructor(message = 'Not found Error', code) {
+    constructor(message = 'Not found Error') {
         super(message);
-        this.code = code;
+        this.statusCode = 404;
     }
 };

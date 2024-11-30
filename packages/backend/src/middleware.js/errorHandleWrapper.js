@@ -7,7 +7,7 @@ const errorHandlerWrapper = (func) => {
         } catch (e) {
             if (e instanceof CustomError) {
                 console.error(`Error occured: ${e.code}`);
-                res.status(400).json({ error: e.message, code: e.code, details: e.details })
+                res.status(e.statusCode).json({ error: e.message, code: e.code, details: e.details })
             } else {
                 console.error('Something else happened!', e);
                 res.status(500).json({ error: 'Internal Server Error' })

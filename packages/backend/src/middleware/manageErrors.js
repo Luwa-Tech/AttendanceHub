@@ -1,6 +1,8 @@
 import { CustomError } from "../utils/errors"
 
-const errorHandlerWrapper = (func) => {
+// for experimental purposes
+
+const manageErrors = (func) => {
     return async (req, res, next) => {
         try {
             await func(req, res, next);
@@ -16,4 +18,4 @@ const errorHandlerWrapper = (func) => {
     }
 };
 
-export default errorHandlerWrapper;
+export default manageErrors;

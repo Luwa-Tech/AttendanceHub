@@ -8,13 +8,13 @@ import crypto from 'crypto';
 import sendMail from '../config/sendMail';
 import { onboardEmail, passwordResetEmail } from '../utils/emailTemplates';
 
-class EmployeeController {
+class AuthController {
     constructor() {
         this.roleService = new RoleService();
         this.employeeService = new EmployeeService();
     }
 
-    registerEmployee = async (req, res) => {
+    register = async (req, res) => {
         const data = matchedData(req);
 
         const checkEmail = await this.employeeService.checkEmail(data.email);
@@ -43,13 +43,13 @@ class EmployeeController {
         res.status(201).json({ employee: result });
     }
 
-    loginEmployee = async (req, res) => {
+    login = async (req, res) => {
         const data = matchedData(req);
         const findEmployee = await this.employeeService.getEmployeeById(data.userId);
 
         const match = bcrypt.compare(data.password, findEmployee.password);
         if (!match) {
-            throw new InputError('Passwords do not match', 'invalid_input') // check meaning of error code -> 400
+            throw new InputError('Passwords do not match');
         };
 
         const token = jwt.sign({ id: findEmployee._id, email: findEmployee.email }, process.env.ACCESS_KEY);
@@ -58,7 +58,7 @@ class EmployeeController {
 
     // Implement changePassword controller
 
-    logoutEmployee = async (req, res) => {
+    logout = async (req, res) => {
         res.clearCookie('access_token').status(200).json({ 'message': 'logged out successfully' });
     }
 
@@ -107,7 +107,7 @@ class EmployeeController {
         const data = matchedData(req);
         // compare passwords
         if (data.newPassword !== data.confirmPassword) {
-            throw new InputError('Passwords do not match', 'invalid_input');
+            throw new InputError('Passwords do not match');
         }
 
         const hashedPwd = bcrypt.hash(data.newPassword, 10);
@@ -120,4 +120,4 @@ class EmployeeController {
     }
 }
 
-export default EmployeeController;
+export default AuthController;

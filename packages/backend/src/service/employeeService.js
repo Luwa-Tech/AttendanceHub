@@ -1,5 +1,5 @@
 import Employee from '../model/Employee';
-import { NotFoundError } from '../utils/errors';
+import { NotFoundError, TokenExpirationError } from '../utils/errors';
 
 class EmployeeService {
     constructor () {
@@ -41,7 +41,7 @@ class EmployeeService {
         const employee = await this.employee.findOne(resetInfo);
 
         if (!employee) {
-            // throw a token has expired error
+            throw new TokenExpirationError('Token has expired. Please re-authenticate.');
         }
 
         return employee // if token is not expired

@@ -3,7 +3,8 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import connectToDB from './config/dbConn.js';
 import cookieParser from 'cookie-parser';
-import globalErrorHandler from './middleware.js/globalErrorHandler.js';
+import authRoute from './routes/authRoute.js'
+import globalErrorHandler from './middleware/globalErrorHandler.js';
 
 const server = express();
 const PORT = process.env.PORT;
@@ -15,12 +16,13 @@ server.use(cookieParser());
 server.use(express.static("public"));
 server.use(express.json());
 
+server.use('/', authRoute);
 
 server.use(globalErrorHandler);
 
 mongoose.connection.once("open", () => {
     server.listen(process.env.PORT, () => {
-        console.log('Please wait..');
+        console.log('Connecting..');
         console.log(`Server is listening on PORT: ${PORT}`);
     })
 })

@@ -1,7 +1,7 @@
-import { AccessDeniedError, NotFoundError } from "../utils/errors";
-import Employee from "../model/Employee";
+import { AccessDeniedError, NotFoundError } from "../utils/errors.js";
+import Employee from "../model/Employee.js";
 
-const checkPermission = async (requiredPermission) => {
+const checkPermission = (requiredPermission) => {
     return async (req, res, next) => {
         const employee = await Employee.findById(req.userId).populate('role');
         if (!employee) {

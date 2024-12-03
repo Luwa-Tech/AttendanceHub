@@ -1,15 +1,12 @@
 import express from 'express';
-import AuthController from '../controllers/AuthController';
-import checkPermission from '../middleware/checkPermission';
-// import manageErrors from '../middleware/manageErrors';
-import { loginDetails, regDetails, validate, genTokenDetails, resetPwdDetails } from '../middleware/validate';
-
 const router = express.Router();
+import checkPermission from '../middleware/checkPermission.js';
+import { loginDetails, regDetails, validate, genTokenDetails, resetPwdDetails } from '../middleware/validate.js';
+import { AuthController } from '../controllers/AuthController.js';
 
 const authController = new AuthController();
 
-
-router.post('/register', validate(regDetails), checkPermission('manage_users'), authController.register)
+router.post('/register', checkPermission('manage_users'), validate(regDetails), authController.register)
 router.post('/login', validate(loginDetails), authController.login)
 router.post('/logout', authController.logout)
 router.post('/generate-reset-token', validate(genTokenDetails), authController.generateResetToken)

@@ -1,5 +1,5 @@
-import Role from "../model/Role";
-import { NotFoundError } from "../utils/errors";
+import Role from "../model/Role.js";
+import { NotFoundError } from "../utils/errors.js";
 
 class RoleService {
     constructor() {

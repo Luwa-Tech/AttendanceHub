@@ -1,14 +1,14 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import RoleService from '../service/roleService';
-import EmployeeService from '../service/employeeService';
+import RoleService from '../service/roleService.js';
+import EmployeeService from '../service/employeeService.js';
 import { matchedData } from 'express-validator'
-import { InputError } from '../utils/errors';
+import { InputError } from '../utils/errors.js';
 import crypto from 'crypto';
-import sendMail from '../config/sendMail';
-import { onboardEmail, passwordResetEmail } from '../utils/emailTemplates';
+import sendMail from '../config/sendMail.js';
+import { onboardEmail, passwordResetEmail } from '../utils/emailTemplates.js';
 
-class AuthController {
+export class AuthController {
     constructor() {
         this.roleService = new RoleService();
         this.employeeService = new EmployeeService();
@@ -119,5 +119,3 @@ class AuthController {
         res.status(200).json({ message: 'Password has been reset' });
     }
 }
-
-export default AuthController;

@@ -1,13 +1,13 @@
 import { body } from 'express-validator';
-import { InputError } from '../utils/errors';
+import { InputError } from '../utils/errors.js';
 
 export const regDetails = [
-  body('firstname').isString().escape().withMessage('firstname is required'),
-  body('lastname').isString().escape().withMessage('lastname is required'),
+  body('firstname').isString().withMessage('firstname is required'),
+  body('lastname').isString().withMessage('lastname is required'),
   body('email').isEmail().withMessage('Invalid email address'),
   body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long'),
-  body('jobRole').isString().escape().withMessage('Job role is required'),
-  body('role').isString().escape().withMessage('Employee role is required')
+  body('jobRole').isString().withMessage('Job role is required'),
+  body('role').isString().withMessage('Employee role is required')
 ];
 
 export const loginDetails = [

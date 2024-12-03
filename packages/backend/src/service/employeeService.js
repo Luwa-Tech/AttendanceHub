@@ -1,5 +1,5 @@
-import Employee from '../model/Employee';
-import { NotFoundError, TokenExpirationError } from '../utils/errors';
+import Employee from '../model/Employee.js';
+import { NotFoundError, TokenExpirationError } from '../utils/errors.js';
 
 class EmployeeService {
     constructor () {

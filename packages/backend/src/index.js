@@ -3,7 +3,8 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import connectToDB from './config/dbConn.js';
 import cookieParser from 'cookie-parser';
-import authRoute from './routes/authRoute.js'
+import authRoute from './routes/authRoute.js';
+import employeeRoute from './routes/employeeRoute.js';
 import globalErrorHandler from './middleware/globalErrorHandler.js';
 
 const server = express();
@@ -17,6 +18,7 @@ server.use(express.static("public"));
 server.use(express.json());
 
 server.use('/', authRoute);
+server.use('/api/v1/employee/', employeeRoute);
 
 server.use(globalErrorHandler);
 

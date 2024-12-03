@@ -14,7 +14,7 @@ class EmployeeService {
         return employee;
     }
 
-    getEmployeeByEmail = async (email) => {
+    getOneByEmail = async (email) => {
         const employee = await this.checkEmail(email);
         if (!employee) {
             throw new NotFoundError(`Employee with email: ${email} not found`);
@@ -23,7 +23,7 @@ class EmployeeService {
         return employee;
     }
 
-    getEmployeeById = async (id) => {
+    getOneById = async (id) => {
         const employee = await this.employee.findOne({id: id}).exec();
         if (!employee) {
             throw new NotFoundError(`Employee with id:${id} is not found`);
@@ -31,7 +31,7 @@ class EmployeeService {
         return employee;
     }
 
-    checkEmployeeResetTokenExpiration = async (resetInfo) => {
+    checkResetTokenExpiration = async (resetInfo) => {
         /*
             Finds and validates employee where resetPasswordExpires
             is not greater than current date and returns employee
@@ -47,9 +47,18 @@ class EmployeeService {
         return employee // if token is not expired
     }
 
-    createNewEmployee = async (employeeDetails) => {
+    create = async (employeeDetails) => {
         const newEmployee = await this.employee.create(employeeDetails);
         return newEmployee;
+    }
+
+    getAll = async () => {
+        const employees = await this.employee.find({});
+        if (!employees) {
+            throw new NotFoundError('No employees found');
+        }
+
+        return employees;
     }
 };
 

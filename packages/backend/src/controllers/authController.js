@@ -32,7 +32,7 @@ export class AuthController {
             jobRole: data.jobRole,
             roleId: role._id
         };
-        const result = await this.employeeService.createNewEmployee(employeeDetails);
+        const result = await this.employeeService.create(employeeDetails);
 
         // Login ID might be too long for the user.
         // change for better user experience.
@@ -45,7 +45,7 @@ export class AuthController {
 
     login = async (req, res) => {
         const data = matchedData(req);
-        const findEmployee = await this.employeeService.getEmployeeById(data.userId);
+        const findEmployee = await this.employeeService.getOneById(data.userId);
 
         const match = bcrypt.compare(data.password, findEmployee.password);
         if (!match) {
@@ -65,7 +65,7 @@ export class AuthController {
     generateResetToken = async (req, res) => {
         const data = matchedData(req);
 
-        const findEmployee = await this.employeeService.getEmployeeByEmail(data.email);
+        const findEmployee = await this.employeeService.getOneByEmail(data.email);
         console.log(findEmployee);
 
         // generate reset token
@@ -90,7 +90,7 @@ export class AuthController {
             resetPasswordExpires: { $gt: Date.now() }
         };
 
-        await this.employeeService.checkEmployeeResetTokenExpiration(resetInfo);
+        await this.employeeService.checkResetTokenExpiration(resetInfo);
 
         // redirect to client reset page
         res.redirect('', { token: req.params.token });
@@ -102,7 +102,7 @@ export class AuthController {
             resetPasswordExpires: { $gt: Date.now() }
         };
 
-        const result = await this.employeeService.checkEmployeeResetTokenExpiration(resetInfo);
+        const result = await this.employeeService.checkResetTokenExpiration(resetInfo);
 
         const data = matchedData(req);
         // compare passwords

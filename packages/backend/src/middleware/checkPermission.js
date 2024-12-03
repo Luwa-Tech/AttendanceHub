@@ -3,8 +3,8 @@ import Employee from "../model/Employee.js";
 
 const checkPermission = (requiredPermission) => {
     return async (req, res, next) => {
-        const employee = await Employee.findById(req.userId).populate('role');
-        if (!employee) {
+        const user = await Employee.findById(req.userId).populate('role');
+        if (!user) {
             throw new NotFoundError('Employee not found')
         }
 

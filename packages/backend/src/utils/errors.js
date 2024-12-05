@@ -9,7 +9,7 @@ export class InputError extends CustomError {
 };
 
 export class AuthorizationError extends CustomError {
-    constructor(message = 'Unauthorized Error', details) {
+    constructor(message = 'Unauthorized Error', details = '') {
         super(message);
         this.details = details;
         this.statusCode = 403;

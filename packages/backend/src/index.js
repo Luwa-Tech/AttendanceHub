@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 import authRoute from './routes/authRoute.js';
 import employeeRoute from './routes/employeeRoute.js';
 import globalErrorHandler from './middleware/globalErrorHandler.js';
+import attendanceRoute from './routes/attendanceRoute.js';
 
 const server = express();
 const PORT = process.env.PORT;
@@ -19,6 +20,7 @@ server.use(express.json());
 
 server.use('/', authRoute);
 server.use('/api/v1/employee/', employeeRoute);
+server.use('/api/v1/employee/', attendanceRoute);
 
 server.use(globalErrorHandler);
 
@@ -28,3 +30,9 @@ mongoose.connection.once("open", () => {
         console.log(`Server is listening on PORT: ${PORT}`);
     })
 })
+
+// TODO:
+// Review features
+// Test and debug features
+// Implement db seed
+// Plan client

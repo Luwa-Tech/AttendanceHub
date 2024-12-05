@@ -35,3 +35,10 @@ export class AccessDeniedError extends CustomError {
         this.details = details;
     }
 }
+
+export class ExistingRecordError extends CustomError {
+    constructor(message = 'Attendance Record Error') {
+        super(message);
+        this.statusCode = 409;
+    }
+}

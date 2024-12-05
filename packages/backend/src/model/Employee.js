@@ -32,17 +32,7 @@ const employeeSchema  = new mongoose.Schema({
         ref: 'Role',
         required: true
     },
-
-    createdAt: {
-        default: Date.now,
-        type: Date
-    },
-
-    updatedAt: {
-        default: Date.now,
-        type: Date
-    }
-});
+}, {timestamps: true});
 
 const Employee = mongoose.model('Employee', employeeSchema);
 

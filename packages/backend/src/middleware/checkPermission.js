@@ -5,7 +5,7 @@ const checkPermission = (requiredPermission) => {
     return async (req, res, next) => {
         const user = await Employee.findById(req.userId).populate('role');
         if (!user) {
-            throw new NotFoundError('Employee not found')
+            throw new NotFoundError('Employee not found');
         }
 
         const hasPermission = user.role.permissions.includes(requiredPermission);

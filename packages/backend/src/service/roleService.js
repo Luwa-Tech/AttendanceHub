@@ -9,7 +9,7 @@ class RoleService {
     getRoleByName = async (name) => {
         const role = await this.role.findOne({name: name});
         if (!role) {
-            throw new NotFoundError(`${name} role not found`, 'not_found');
+            throw new NotFoundError(`${name} role not found`);
         }
         return role;
     }

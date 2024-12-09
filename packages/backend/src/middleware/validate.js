@@ -6,7 +6,7 @@ export const regDetails = [
   body('lastname').isString().withMessage('lastname is required'),
   body('email').isEmail().withMessage('Invalid email address'),
   body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long'),
-  body('jobRole').isString().withMessage('Job role is required'),
+  body('jobTitle').isString().withMessage('Job role is required'),
   body('role').isString().withMessage('Employee role is required')
 ];
 

@@ -33,6 +33,6 @@ mongoose.connection.once("open", () => {
 
 // TODO:
 // Review features
+// Implement db seed - DONE
 // Test and debug features
-// Implement db seed
 // Plan client

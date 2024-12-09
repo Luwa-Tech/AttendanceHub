@@ -29,7 +29,7 @@ export class AuthController {
             lastname: data.lastname,
             email: data.email,
             password: hashedPwd,
-            jobRole: data.jobRole,
+            jobTitle: data.jobTitle,
             roleId: role._id
         };
         const result = await this.employeeService.create(employeeDetails);

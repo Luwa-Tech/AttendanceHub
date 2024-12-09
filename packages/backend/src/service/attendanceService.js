@@ -22,8 +22,8 @@ export class AttendanceService {
         return record;
     }
 
-    checkInAttendance = async (checkIn, employeeId) => {
-        const checkInTime = new Date(checkIn);
+    checkInAttendance = async (employeeId) => {
+        const checkInTime = new Date();
         const openingHour = 8;
         const closingHour = 16;
 
@@ -60,8 +60,8 @@ export class AttendanceService {
         return checkInResults;
     }
 
-    checkOutAttendance = async (checkOut, employeeId) => {
-        const checkOutTime = new Date(checkOut);
+    checkOutAttendance = async (employeeId) => {
+        const checkOutTime = new Date();
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 

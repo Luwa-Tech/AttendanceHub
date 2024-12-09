@@ -1,5 +1,4 @@
 import { AttendanceService } from "../service/attendanceService.js";
-import { matchedData } from 'express-validator';
 
 export class AttendanceController {
     constructor() {
@@ -7,17 +6,15 @@ export class AttendanceController {
     }
 
     checkIn = async (req, res) => {
-        const data = matchedData(req);
-        const newRecord = await this.attendanceService.checkInAttendance(data.checkInTime, employeeId);
+        const newRecord = await this.attendanceService.checkInAttendance(employeeId);
 
         res.status(201).json({ message: 'Check-in successful', record: newRecord });
     }
 
     checkOut = async (req, res) => {
-        const data = matchedData(req);
-        const record = await this.attendanceService.checkOutAttendance(data.checkOutTime, employeeId);
+        const record = await this.attendanceService.checkOutAttendance(employeeId);
 
-        res.status(200).json({ message: 'Check-out successful', record: record });        
+        res.status(200).json({ message: 'Check-out successful', record: record });
     }
 
     //getByDate

@@ -7,6 +7,7 @@ import { InputError } from '../utils/errors.js';
 import crypto from 'crypto';
 import sendMail from '../config/sendMail.js';
 import { onboardEmail, passwordResetEmail } from '../utils/emailTemplates.js';
+import { getNextSequenceValue } from '../model/Counter.js';
 
 export class AuthController {
     constructor() {
@@ -22,20 +23,20 @@ export class AuthController {
             res.status(409).json({ message: `Email ${data.email} already in use` });
         }
 
-        const role = await this.roleService.getRoleByName(data.role);
         const hashedPwd = await bcrypt.hash(data.password, 10);
+        const role = await this.roleService.getRoleByName(data.role);
+        const employeeId = await getNextSequenceValue('employeeId');
         const employeeDetails = {
             firstname: data.firstname,
             lastname: data.lastname,
             email: data.email,
             password: hashedPwd,
             jobTitle: data.jobTitle,
-            roleId: role._id
+            roleId: role._id,
+            employeeId: employeeId
         };
         const result = await this.employeeService.create(employeeDetails);
 
-        // Login ID might be too long for the user.
-        // change for better user experience.
         const template = onboardEmail(result, data.password);
 
         await sendMail(result.email, template.subject, template.html);
@@ -45,14 +46,14 @@ export class AuthController {
 
     login = async (req, res) => {
         const data = matchedData(req);
-        const findEmployee = await this.employeeService.getOneById(data.userId);
+        const findEmployee = await this.employeeService.getOne(data.id);
 
         const match = bcrypt.compare(data.password, findEmployee.password);
         if (!match) {
             throw new InputError('Passwords do not match');
         };
 
-        const token = jwt.sign({ id: findEmployee._id, email: findEmployee.email }, process.env.ACCESS_KEY);
+        const token = jwt.sign({ id: findEmployee._id, employeeId: findEmployee.employeeId }, process.env.ACCESS_KEY);
         res.cookie('access_token', token, { httpOnly: true }).status(200).json({ 'message': 'Employee logged in' });
     }
 
@@ -65,7 +66,7 @@ export class AuthController {
     generateResetToken = async (req, res) => {
         const data = matchedData(req);
 
-        const findEmployee = await this.employeeService.getOneByEmail(data.email);
+        const findEmployee = await this.employeeService.getOne(data.id);
         console.log(findEmployee);
 
         // generate reset token

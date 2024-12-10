@@ -14,7 +14,7 @@ export const onboardEmail = (employee, pwd) => {
     
             <p>To get you started, here are your login details:</p>
             <ul>
-                <li><strong>Employee ID</strong>: ${employee._id}</li>
+                <li><strong>Employee ID</strong>: ${employee.employeeId}</li>
                 <li><strong>Temporary Password</strong>: ${pwd}</li>
             </ul>
     

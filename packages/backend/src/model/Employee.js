@@ -32,6 +32,12 @@ const employeeSchema  = new mongoose.Schema({
         ref: 'Role',
         required: true
     },
+
+    employeeId: {
+        type: String,
+        required: true,
+        unique: true
+    }
 }, {timestamps: true});
 
 const Employee = mongoose.model('Employee', employeeSchema);

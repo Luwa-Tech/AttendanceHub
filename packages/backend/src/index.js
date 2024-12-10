@@ -22,7 +22,7 @@ server.use('/', authRoute);
 server.use('/api/v1/employee/', employeeRoute);
 server.use('/api/v1/employee/', attendanceRoute);
 
-server.use(globalErrorHandler);
+//server.use(globalErrorHandler);
 
 mongoose.connection.once("open", () => {
     server.listen(process.env.PORT, () => {

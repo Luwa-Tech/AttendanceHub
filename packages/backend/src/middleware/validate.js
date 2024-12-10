@@ -10,13 +10,14 @@ export const regDetails = [
   body('role').isString().withMessage('Employee role is required')
 ];
 
+// change login to email
 export const loginDetails = [
-  body('email').isString().withMessage('ID is required'),
+  body('id').isInt().withMessage('Invalid ID'),
   body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long')
 ];
 
 export const genTokenDetails = [
-  body('email').isString().withMessage('ID is required')
+  body('id').isInt().withMessage('Invalid ID'),
 ];
 
 export const resetPwdDetails = [
@@ -29,9 +30,7 @@ export const validate = (validations) => {
     for (let validation of validations) {
       const result = await validation.run(req);
       if (!result.isEmpty()) {
-        console.log(result.array())
         const errorDetails = result.array().map(err => ({ field: err.param, message: err.msg }));
-
         throw new InputError('Validation Error', errorDetails);
       }
     }

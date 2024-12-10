@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import seedRoles from "./seeds/role.seed.js";
 import seedStatus from "./seeds/status.seed.js";
 import seedEmployees from "./seeds/employee.seed.js";
+import seedCounter from "./seeds/counter.seed.js";
 
 const seedDB = async () => {
     await mongoose.connect(process.env.DB_URL);
@@ -12,6 +13,7 @@ const seedDB = async () => {
 
         await seedRoles();
         await seedStatus();
+        await seedCounter();
         await seedEmployees();
 
         console.log('Database seeded successfully!');

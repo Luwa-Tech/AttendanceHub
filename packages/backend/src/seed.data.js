@@ -45,3 +45,10 @@ export const employees = [
         "roleId": ""
     }
 ]
+
+export const counter = [
+    {
+        id: "employeeId",
+        sequence_value: 182870
+    }
+]

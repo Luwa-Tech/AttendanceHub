@@ -14,17 +14,17 @@ class EmployeeService {
         return employee;
     }
 
-    getOneByEmail = async (email) => {
-        const employee = await this.checkEmail(email);
-        if (!employee) {
-            throw new NotFoundError(`Employee with email: ${email} not found`);
-        };
+    // getOneByEmail = async (email) => {
+    //     const employee = await this.checkEmail(email);
+    //     if (!employee) {
+    //         throw new NotFoundError(`Employee with email: ${email} not found`);
+    //     };
 
-        return employee;
-    }
+    //     return employee;
+    // }
 
-    getOneById = async (id) => {
-        const employee = await this.employee.findOne({id: id}).exec();
+    getOne = async (id) => {
+        const employee = await this.employee.findOne({employeeId: id}).exec();
         if (!employee) {
             throw new NotFoundError(`Employee with id:${id} is not found`);
         }

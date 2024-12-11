@@ -37,23 +37,29 @@ export class AuthController {
         };
         const result = await this.employeeService.create(employeeDetails);
 
-        const template = onboardEmail(result, data.password);
+        let sent;
+        if (result) {
+            const template = onboardEmail(result, data.password);
+            sent = await sendMail(result.email, template.subject, template.html);
+        }
 
-        await sendMail(result.email, template.subject, template.html);
-
-        res.status(201).json({ employee: result });
+        if (sent) {
+            res.status(201).json({ message: "New employee registered. Please check your email for login details", employee: result });
+        } else {
+            res.status(201).json({message: "Employee Created, But email was not successfully sent"})
+        }
     }
 
     login = async (req, res) => {
         const data = matchedData(req);
         const findEmployee = await this.employeeService.getOne(data.id);
 
-        const match = bcrypt.compare(data.password, findEmployee.password);
+        const match = await bcrypt.compare(data.password, findEmployee.password);
         if (!match) {
             throw new InputError('Passwords do not match');
         };
 
-        const token = jwt.sign({ id: findEmployee._id, employeeId: findEmployee.employeeId }, process.env.ACCESS_KEY);
+        const token = jwt.sign({ id: findEmployee._id, employeeId: findEmployee.employeeId, roleId: findEmployee.roleId }, process.env.ACCESS_KEY);
         res.cookie('access_token', token, { httpOnly: true }).status(200).json({ 'message': 'Employee logged in' });
     }
 

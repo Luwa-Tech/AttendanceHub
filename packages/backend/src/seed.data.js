@@ -42,7 +42,8 @@ export const employees = [
         "email": "johndoe@example.com",
         "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOUJRCHVKqagAC",
         "jobTitle": "Manager",
-        "roleId": ""
+        "roleId": "",
+        "employeeId": 182870
     }
 ]
 

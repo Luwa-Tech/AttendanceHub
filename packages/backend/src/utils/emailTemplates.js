@@ -1,4 +1,4 @@
-export const onboardEmail = (employee, pwd) => {
+export const onboardEmail = (result, pwd) => {
     const template = {
         subject: 'Welcome to AttendanceHub!',
         html:  `
@@ -8,13 +8,13 @@ export const onboardEmail = (employee, pwd) => {
             <title>Welcome to AttendanceHub!</title>
         </head>
         <body>
-            <p>Dear ${employee.firstname},</p>
+            <p>Dear ${result.firstname},</p>
     
             <p>Congratulations and welcome to <strong>[Your Company Name]</strong>! We are thrilled to have you join our Company as a <strong>${result.jobRole}</strong>.</p>
     
             <p>To get you started, here are your login details:</p>
             <ul>
-                <li><strong>Employee ID</strong>: ${employee.employeeId}</li>
+                <li><strong>Employee ID</strong>: ${result.employeeId}</li>
                 <li><strong>Temporary Password</strong>: ${pwd}</li>
             </ul>
     

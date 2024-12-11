@@ -10,9 +10,8 @@ export const regDetails = [
   body('role').isString().withMessage('Employee role is required')
 ];
 
-// change login to email
 export const loginDetails = [
-  body('id').isInt().withMessage('Invalid ID'),
+  body('id').isNumeric().withMessage('Invalid ID'),
   body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long')
 ];
 

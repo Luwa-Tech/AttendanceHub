@@ -1,3 +1,4 @@
+import 'express-async-errors';
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
@@ -22,7 +23,7 @@ server.use('/', authRoute);
 server.use('/api/v1/employee/', employeeRoute);
 server.use('/api/v1/employee/', attendanceRoute);
 
-//server.use(globalErrorHandler);
+server.use(globalErrorHandler);
 
 mongoose.connection.once("open", () => {
     server.listen(process.env.PORT, () => {
@@ -30,9 +31,3 @@ mongoose.connection.once("open", () => {
         console.log(`Server is listening on PORT: ${PORT}`);
     })
 })
-
-// TODO:
-// Review features
-// Implement db seed - DONE
-// Test and debug features
-// Plan client

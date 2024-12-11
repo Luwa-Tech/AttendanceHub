@@ -5,12 +5,12 @@ export const onboardEmail = (result, pwd) => {
         <!DOCTYPE html>
         <html>
         <head>
-            <title>Welcome to AttendanceHub!</title>
+            <title>Welcome to BP Refinery!</title>
         </head>
         <body>
             <p>Dear ${result.firstname},</p>
     
-            <p>Congratulations and welcome to <strong>[Your Company Name]</strong>! We are thrilled to have you join our Company as a <strong>${result.jobRole}</strong>.</p>
+            <p>Congratulations and welcome to <strong>BP Refinery</strong>! We are thrilled to have you join our Company as a <strong>${result.jobRole}</strong>.</p>
     
             <p>To get you started, here are your login details:</p>
             <ul>
@@ -30,7 +30,7 @@ export const onboardEmail = (result, pwd) => {
             <p>Once again, welcome! We look forward to working with you and achieving great things together.</p>
     
             <p>Best regards,</p>
-            <p>AttendanceHub</p>
+            <p>BP Refinery</p>
         </body>
         </html>
     `
@@ -50,7 +50,7 @@ export const passwordResetEmail = (employee, resetLink) => {
             <body>
                 <p>Dear ${employee.firstname},</p>
 
-                <p>We received a request to reset your password for your account at <strong>[Your Company Name]</strong>. If you did not make this request, please ignore this email and your password will remain unchanged.</p>
+                <p>We received a request to reset your password for your account at <strong>BP Refinery</strong>. If you did not make this request, please ignore this email and your password will remain unchanged.</p>
 
                 <p>To reset your password, please click on the link below or paste it into your browser:</p>
                 <p><a href="${resetLink}">Reset Password</a></p>
@@ -58,7 +58,7 @@ export const passwordResetEmail = (employee, resetLink) => {
                 <p><strong>Note:</strong> This link will expire in 15 minutes for security reasons.</p>
 
                 <p>Best regards,</p>
-                <p>AttendanceHub</p>
+                <p>BP Refinery</p>
             </body>
             </html>
         `

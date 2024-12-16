@@ -1,0 +1,17 @@
+{
+  "name": "attendancehub",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
+    "seed:backend": "cd packages/backend && npm run seed",
+    "start:backend": "cd packages/backend && npm run server",
+    "start:frontend": "cd packages/frontend && npm run client"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}

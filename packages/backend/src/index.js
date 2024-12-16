@@ -11,10 +11,14 @@ import attendanceRoute from './routes/attendanceRoute.js';
 
 const server = express();
 const PORT = process.env.PORT;
+const corsOptions = {
+    origin: 'http://localhost:5173/',
+    optionsSuccessStatus: 200
+};
 
 connectToDB();
 
-server.use(cors());
+server.use(cors(corsOptions));
 server.use(cookieParser());
 server.use(express.static("public"));
 server.use(express.json());

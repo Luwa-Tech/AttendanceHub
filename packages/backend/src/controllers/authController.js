@@ -24,7 +24,7 @@ export class AuthController {
         }
 
         const hashedPwd = await bcrypt.hash(data.password, 10);
-        const role = await this.roleService.getRoleByName(data.role);
+        const role = await this.roleService.getRole({name: data.role});
         const employeeId = await getNextSequenceValue('employeeId');
         const employeeDetails = {
             firstname: data.firstname,
@@ -53,14 +53,24 @@ export class AuthController {
     login = async (req, res) => {
         const data = matchedData(req);
         const findEmployee = await this.employeeService.getOne(data.id);
+        const role = await this.roleService.getRole({_id: findEmployee.roleId});
 
         const match = await bcrypt.compare(data.password, findEmployee.password);
         if (!match) {
             throw new InputError('Passwords do not match');
         };
 
+        const employee = {
+            email: findEmployee.email,
+            jobTitle: findEmployee.jobTitle,
+            role: {
+                name: role.name,
+                permissions: role.permissions
+            }
+        };
+
         const token = jwt.sign({ id: findEmployee._id, employeeId: findEmployee.employeeId, roleId: findEmployee.roleId }, process.env.ACCESS_KEY);
-        res.cookie('access_token', token, { httpOnly: true }).status(200).json({ 'message': 'Employee logged in' });
+        res.cookie('access_token', token, { httpOnly: true }).status(200).json({ 'message': 'Employee logged in', employee});
     }
 
     // Implement changePassword controller

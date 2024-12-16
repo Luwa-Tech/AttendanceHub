@@ -6,8 +6,8 @@ class RoleService {
         this.role = Role;
     }
 
-    getRoleByName = async (name) => {
-        const role = await this.role.findOne({name: name});
+    getRole = async (info) => {
+        const role = await this.role.findOne(info);
         if (!role) {
             throw new NotFoundError(`${name} role not found`);
         }

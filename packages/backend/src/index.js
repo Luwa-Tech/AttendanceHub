@@ -1,4 +1,5 @@
 import 'express-async-errors';
+import ngrok from '@ngrok/ngrok';
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
@@ -11,14 +12,10 @@ import attendanceRoute from './routes/attendanceRoute.js';
 
 const server = express();
 const PORT = process.env.PORT;
-const corsOptions = {
-    origin: 'http://localhost:5173/',
-    optionsSuccessStatus: 200
-};
 
 connectToDB();
 
-server.use(cors(corsOptions));
+server.use(cors());
 server.use(cookieParser());
 server.use(express.static("public"));
 server.use(express.json());
@@ -30,8 +27,12 @@ server.use('/api/v1/employee/', attendanceRoute);
 server.use(globalErrorHandler);
 
 mongoose.connection.once("open", () => {
-    server.listen(process.env.PORT, () => {
+    server.listen(PORT, () => {
         console.log('Connecting..');
         console.log(`Server is listening on PORT: ${PORT}`);
     })
-})
+});
+
+// for development purposes
+// ngrok.connect({ addr: PORT, authtoken_from_env: true })
+// 	.then(listener => console.log(`Ingress established at: ${listener.url()}`));

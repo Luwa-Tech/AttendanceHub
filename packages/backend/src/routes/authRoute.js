@@ -12,6 +12,7 @@ router.post('/login', validate(loginDetails), authController.login)
 router.post('/logout', authController.logout)
 router.post('/generate-reset-token', validate(genTokenDetails), authController.generateResetToken)
 router.get('/reset-password/:token', authController.redirectToResetPasswordPage)
-router.post('/reset-password', validate(resetPwdDetails), authController.resetPassword)
+// Review later
+router.post('/reset-password/:token', validate(resetPwdDetails), authController.resetPassword)
 
 export default router;

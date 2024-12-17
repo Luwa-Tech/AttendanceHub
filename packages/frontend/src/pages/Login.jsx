@@ -23,7 +23,8 @@ const LoginPage = () => {
 
     const login = async (data) => {
         try {
-            const response = await axios.post("http://localhost:5001/login", {
+            // change url to prod-url during deployment
+            const response = await axios.post("https://a43c-172-166-156-103.ngrok-free.app/login", {
                 id: data.ID,
                 password: data.password
             })

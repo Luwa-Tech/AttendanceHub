@@ -1,6 +1,43 @@
 const HomePage = () => {
     return (
-        <h1>This is home</h1>
+        // <main className="mt-[4rem] ">
+        //     <div className="md:w-[90%] md:mx-auto px-2 py-2 md:px-0 md:py-0 ">
+        //         <section className="">
+        //             <img className="bg-slate-300 w-[10rem] h-[10rem] rounded-[5rem]" src="" title="Profile image" />
+        //             <div className="">
+        //                 <p className="">Full employee name</p>
+        //                 <p>Job title</p>
+        //             </div>
+        //         </section>
+        //         <section>
+        //             <span>Closed</span>
+        //             <div>
+        //                 <button>Check in</button>
+        //                 <button>Check out</button>
+        //             </div>
+        //         </section>
+        //     </div>
+        // </main>
+
+        <main className="mt-16">
+            <div className="md:w-4/5 md:mx-auto px-4 py-4 md:px-0 md:py-0">
+                <section className="flex items-center space-x-4">
+                    <img className="bg-slate-300 w-40 h-40 rounded-full" src="" alt="Profile image" />
+                    <div className="text-left">
+                        <p className="text-xl font-semibold">Full Employee Name</p>
+                        <p className="text-gray-600">Job Title</p>
+                    </div>
+                </section>
+                <section className="mt-8">
+                    <span className="text-red-500 font-bold">Closed</span>
+                    <div className="mt-4 space-x-2">
+                        <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Check in</button>
+                        <button className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Check out</button>
+                    </div>
+                </section>
+            </div>
+        </main>
+
     )
 }
 

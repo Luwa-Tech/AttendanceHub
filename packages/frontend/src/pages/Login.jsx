@@ -6,7 +6,7 @@ import { useState, useEffect } from "react"
 import useAuth from "../hooks/useAuth"
 
 const LoginPage = () => {
-    const { setAuth } = useAuth()
+    // const { setAuth } = useAuth()
 
     const [error, setError] = useState("")
 
@@ -48,6 +48,13 @@ const LoginPage = () => {
             console.log(error)
         }
     }
+
+    /* 
+        Check if user has an active session (auth.user):
+            navigate user to attendance page
+        else:
+            do nothing
+    */
 
     useEffect(() => {
         if (isValid && isSubmitSuccessful) {

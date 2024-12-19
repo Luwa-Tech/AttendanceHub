@@ -1,4 +1,4 @@
-const HomePage = () => {
+const AttendancePage = () => {
     return (
         // <main className="mt-[4rem] ">
         //     <div className="md:w-[90%] md:mx-auto px-2 py-2 md:px-0 md:py-0 ">
@@ -41,4 +41,4 @@ const HomePage = () => {
     )
 }
 
-export default HomePage;
+export default AttendancePage;

@@ -6,7 +6,7 @@ import { FaChevronRight, FaChevronLeft  } from "react-icons/fa";
 const Sidebar = ({ isCollapsed, isMobileSidebarVisible, toggleSidebar }) => {
   //const {isMobile} = useRenderHook();
   const sidebarItems = [
-    { href: "/", label: "Employees", icon: < MdManageAccounts className="text-white w-7 h-7"/>},
+    { href: "/admin_dashboard/", label: "Employees", icon: < MdManageAccounts className="text-white w-7 h-7"/>},
     { href: "/admin_dashboard/view_attendance", label: "View", icon: < MdViewList className="text-white w-7 h-7"/>},
     { href: "/admin_dashboard/update_attendance", label: "Update", icon: < MdOutlineUpdate className="text-white w-7 h-7"/>},
   ];

@@ -1,24 +1,6 @@
 const AttendancePage = () => {
+    
     return (
-        // <main className="mt-[4rem] ">
-        //     <div className="md:w-[90%] md:mx-auto px-2 py-2 md:px-0 md:py-0 ">
-        //         <section className="">
-        //             <img className="bg-slate-300 w-[10rem] h-[10rem] rounded-[5rem]" src="" title="Profile image" />
-        //             <div className="">
-        //                 <p className="">Full employee name</p>
-        //                 <p>Job title</p>
-        //             </div>
-        //         </section>
-        //         <section>
-        //             <span>Closed</span>
-        //             <div>
-        //                 <button>Check in</button>
-        //                 <button>Check out</button>
-        //             </div>
-        //         </section>
-        //     </div>
-        // </main>
-
         <main className="mt-16">
             <div className="md:w-4/5 md:mx-auto px-4 py-4 md:px-0 md:py-0">
                 <section className="flex items-center space-x-4">

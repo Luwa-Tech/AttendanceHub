@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom"
 import {
     Button,
     Dialog,
@@ -8,7 +9,8 @@ import {
     Typography,
 } from "@material-tailwind/react";
 
-const NotificationDialog = ({ openDialog, handleDialog, resMsg, msgTitle }) => {
+const NotificationDialog = ({ openDialog, setOpen, resMsg, msgTitle, location }) => {
+    const handleDialog = () => setOpen(!open);
 
     return (
         <>
@@ -24,9 +26,19 @@ const NotificationDialog = ({ openDialog, handleDialog, resMsg, msgTitle }) => {
                     </Typography>
                 </DialogBody>
                 <DialogFooter className="space-x-2">
-                    <Button variant="text" color="blue-gray" onClick={handleDialog}>
-                        close
-                    </Button>
+                    {
+                        location === "/reset_password" ? (
+                            <NavLink to="/">
+                                <Button variant="text" color="blue-gray" onClick={handleDialog}>
+                                    Ok, Got it
+                                </Button>
+                            </NavLink>
+                        ) : (
+                            <Button variant="text" color="blue-gray" onClick={handleDialog}>
+                                close
+                            </Button>
+                        )
+                    }
                 </DialogFooter>
             </Dialog>
         </>

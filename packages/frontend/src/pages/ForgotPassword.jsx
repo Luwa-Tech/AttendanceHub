@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, useLocation } from "react-router-dom"
 import {useForm} from "react-hook-form"
 import axios from "axios"
 import {ImSpinner} from "react-icons/im"
@@ -10,8 +10,10 @@ const ForgotPasswordPage = () => {
     const [responseMsg, setResponseMsg] = useState("")
     const [msgTitle, setMsgTitle] = useState("Password Reset")
     const [open, setOpen] = useState(false);
- 
-    const handleOpen = () => setOpen(!open);
+    const location = useLocation();
+
+    // Change location
+    const successMsg = "An email with a password reset link has been sent to you. Please check your email and click the link to reset your password. If you don't see the email, check your spam folder or try resending the request."
 
     const form = useForm({
         mode: "onBlur"
@@ -28,9 +30,8 @@ const ForgotPasswordPage = () => {
             })
             
             if (response.status === 200) {
-                setResponseMsg(response.data);
-                handleOpen();
-
+                setResponseMsg(successMsg);
+                setOpen(prev => !prev)
             }
         } catch(error) {
             setError(error.response.data.error)
@@ -64,7 +65,13 @@ const ForgotPasswordPage = () => {
                     <button type="submit" disabled={!isDirty || !isValid || isSubmitting}  className={`bg-button-400 py-2 text-white hover:bg-opacity-[0.7] flex justify-center items-center rounded-[0.3rem] md:text-[1.1rem] mb-2 ${isSubmitting || !isDirty || !isValid ? "bg-opacity-[0.7] hover:bg-opacity-[0.7] " : ""}`}>{isSubmitting ? <ImSpinner className={`${isSubmitting ? "animate-spin bg-opacity-[0.7]" : "animate-none"} w-7 h-7`}/> : "Recover"}</button>
                 </form>
             </section>
-            <NotificationDialog openDialog={open} handleDialog={handleOpen} resMsg={responseMsg} msgTitle={msgTitle}/>
+            <NotificationDialog
+                openDialog={open}
+                setOpen={setOpen}
+                resMsg={responseMsg}
+                msgTitle={msgTitle}
+                location={location.pathname}
+            />
         </main>
     )
 }

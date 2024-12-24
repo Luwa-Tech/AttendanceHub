@@ -132,6 +132,6 @@ export class AuthController {
         result.resetPasswordExpires = undefined;
         await result.save();
 
-        res.status(200).json({ message: 'Password has been reset' });
+        res.status(200).json({ message: 'Password reset was successful' });
     }
 }

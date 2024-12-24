@@ -1,5 +1,12 @@
 const AttendancePage = () => {
-    
+
+    /* 
+    Check if user has an active session (auth.user):
+        navigate user to attendance page
+    else:
+        do nothing
+*/
+
     return (
         <main className="mt-16">
             <div className="md:w-4/5 md:mx-auto px-4 py-4 md:px-0 md:py-0">

@@ -5,14 +5,18 @@ import axios from "axios"
 import { useState, useEffect } from "react"
 import useAuth from "../hooks/useAuth"
 
+/*
+
+    TODO:
+        - write auth pages logic
+        - write attendance logic
+        - write dashboard logic and data
+ */
+
 const LoginPage = () => {
-    // const { setAuth } = useAuth()
-
+    const { setAuth} = useAuth()
     const [error, setError] = useState("")
-
-    const location = useLocation()
     const navigate = useNavigate()
-    const from = location.state?.from?.pathname || "/"
 
     const form = useForm({
         mode: "onBlur"
@@ -24,37 +28,21 @@ const LoginPage = () => {
     const login = async (data) => {
         try {
             // change url to prod-url during deployment
-            const response = await axios.post("https://a43c-172-166-156-103.ngrok-free.app/login", {
+            const response = await axios.post("https://3e62-172-166-156-100.ngrok-free.app/login", {
                 id: data.ID,
                 password: data.password
             })
 
-            console.log(response);
-            // if (response) {
-            //     //give user access and redirect user profile
-            //     console.log(response.data.user)
+            if (response.status === 200) {
+                setAuth(response.data.employee)
 
-            //     const role = response.data.user.user.role
+                navigate("/attendance");
+            }
 
-            //     setAuth({
-            //         user: data.email,
-            //         role: role        
-            //     })
-
-            //     navigate(from, { replace: true })
-            // }
         } catch (error) {
-            // setError(error.response.data.error)
-            console.log(error)
+            setError(error.response.data.error)
         }
     }
-
-    /* 
-        Check if user has an active session (auth.user):
-            navigate user to attendance page
-        else:
-            do nothing
-    */
 
     useEffect(() => {
         if (isValid && isSubmitSuccessful) {
@@ -93,7 +81,7 @@ const LoginPage = () => {
                     {
                         error !== "" && <p className="text-red-700 text-[.95rem]">{error}</p>
                     }
-                    <button type="submit" disabled={!isDirty || !isValid || isSubmitting} className={`bg-blue-950 py-2 text-[1.3rem] hover:bg-opacity-[0.5] flex justify-center text-white items-center rounded-[0.3rem] md:text-[1.05rem] mb-2 ${isSubmitting || !isDirty || !isValid ? "bg-opacity-[0.9] hover:bg-opacity-[0.7]" : ""}`}>{isSubmitting ? <ImSpinner className={`${isSubmitting ? "animate-spin bg-opacity-[0.7]" : "animate-none"} w-6 h-6`} /> : "Login"}</button>
+                    <button type="submit" disabled={!isDirty || !isValid || isSubmitting} className={`bg-button-400 py-2 text-[1.3rem] hover:bg-opacity-[0.5] flex justify-center text-white items-center rounded-[0.3rem] md:text-[1.05rem] mb-2 ${isSubmitting || !isDirty || !isValid ? "bg-opacity-[0.9] hover:bg-opacity-[0.7]" : ""}`}>{isSubmitting ? <ImSpinner className={`${isSubmitting ? "animate-spin bg-opacity-[0.7]" : "animate-none"} w-7 h-7`} /> : "Login"}</button>
                 </form>
             </section>
         </main>

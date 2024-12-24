@@ -34,5 +34,5 @@ mongoose.connection.once("open", () => {
 });
 
 // for development purposes
-// ngrok.connect({ addr: PORT, authtoken_from_env: true })
-// 	.then(listener => console.log(`Ingress established at: ${listener.url()}`));
+ngrok.connect({ addr: PORT, authtoken_from_env: true })
+	.then(listener => console.log(`Ingress established at: ${listener.url()}`));

@@ -83,7 +83,6 @@ export class AuthController {
         const data = matchedData(req);
 
         const findEmployee = await this.employeeService.getOne(data.id);
-        console.log(findEmployee);
 
         // generate reset token
         const token = crypto.randomBytes(20).toString('hex');

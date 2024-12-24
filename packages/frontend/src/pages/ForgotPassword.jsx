@@ -3,10 +3,15 @@ import {useForm} from "react-hook-form"
 import axios from "axios"
 import {ImSpinner} from "react-icons/im"
 import { useState, useEffect } from "react"
+import NotificationDialog from "../component/MessageModal"
 
 const ForgotPasswordPage = () => {
     const [error, setError] = useState("")
     const [responseMsg, setResponseMsg] = useState("")
+    const [msgTitle, setMsgTitle] = useState("Password Reset")
+    const [open, setOpen] = useState(false);
+ 
+    const handleOpen = () => setOpen(!open);
 
     const form = useForm({
         mode: "onBlur"
@@ -17,12 +22,15 @@ const ForgotPasswordPage = () => {
 
     const initPasswordReset = async (data) => {
         try {
-            const response = await axios.post("//add url here", {
+            // Change to Production API URL
+            const response = await axios.post("https://3ad4-172-166-151-113.ngrok-free.app/generate-reset-token", {
                 id: data.ID
             })
             
-            if (response) {
-                setResponseMsg(response.data.message)
+            if (response.status === 200) {
+                setResponseMsg(response.data);
+                handleOpen();
+
             }
         } catch(error) {
             setError(error.response.data.error)
@@ -39,9 +47,6 @@ const ForgotPasswordPage = () => {
         <main className="mt-[2rem] md:mt-[.5rem]">
             <section className="md:w-[30%] mx-auto my-[5rem] w-[80%]">
                 <p className="text-[1.3rem] md:text-[1.7rem] mb-6 font-medium leading-normal text-center">Employee ID</p>
-                {
-                    responseMsg !== "" && <p className="text-[1.1rem] text-blue-800 mb-[.1rem]">{responseMsg}</p>
-                }
                 <form className="flex flex-col gap-4" onSubmit={handleSubmit(initPasswordReset)} noValidate>
                     <div className="flex flex-col gap-2 font-normal leading-normal">
                         
@@ -56,15 +61,10 @@ const ForgotPasswordPage = () => {
                     {
                       error !== "" &&  <p className="text-red-700 text-[.95rem]">{error}</p>
                     }
-                    <button type="submit" disabled={!isDirty || !isValid || isSubmitting}  className={`bg-blue-950 py-2 text-white hover:bg-opacity-[0.7] flex justify-center items-center rounded-[0.3rem] md:text-[1.1rem] mb-2 ${isSubmitting || !isDirty || !isValid ? "bg-opacity-[0.7] hover:bg-opacity-[0.7] " : ""}`}>{isSubmitting ? <ImSpinner className={`${isSubmitting ? "animate-spin bg-opacity-[0.7]" : "animate-none"} w-6 h-6`}/> : "Recover"}</button>
+                    <button type="submit" disabled={!isDirty || !isValid || isSubmitting}  className={`bg-button-400 py-2 text-white hover:bg-opacity-[0.7] flex justify-center items-center rounded-[0.3rem] md:text-[1.1rem] mb-2 ${isSubmitting || !isDirty || !isValid ? "bg-opacity-[0.7] hover:bg-opacity-[0.7] " : ""}`}>{isSubmitting ? <ImSpinner className={`${isSubmitting ? "animate-spin bg-opacity-[0.7]" : "animate-none"} w-7 h-7`}/> : "Recover"}</button>
                 </form>
             </section>
-            {/* <Rodal height={240} width={350} visible={openModal} animation="zoom">
-                <section className="mt-[4rem] flex flex-col items-center gap-4">
-                    <p className="text-center text-[1rem] text-[#334155]">{responseMessage}</p>
-                    <button className="bg-blue-950 text-white hover:bg-opacity-[0.95] px-[2.5rem] py-2 rounded-[.4rem]" onClick={() => setOpenModal(prev => !prev)}>close</button>
-                </section>
-            </Rodal> */}
+            <NotificationDialog openDialog={open} handleDialog={handleOpen} resMsg={responseMsg} msgTitle={msgTitle}/>
         </main>
     )
 }

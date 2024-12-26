@@ -1,12 +1,13 @@
 {
   "name": "attendancehub",
   "version": "1.0.0",
-  "description": "",
+  "private": true,
+  "workspaces": ["packages/*"],
   "scripts": {
-    "start": "concurrently \"npm run start:backend\" \"npm run start:frontend\"",
-    "seed:backend": "cd packages/backend && npm run seed",
-    "start:backend": "cd packages/backend && npm run server",
-    "start:frontend": "cd packages/frontend && npm run client"
+    "start": "concurrently --kill-others-on-fail \"yarn backend\"  \"yarn frontend\"",
+    "seed": "yarn workspace backend seed",
+    "backend": "yarn workspace backend start",
+    "frontend": "yarn workspace frontend dev"
   },
   "keywords": [],
   "author": "",

@@ -9,6 +9,9 @@ import authRoute from './routes/authRoute.js';
 import employeeRoute from './routes/employeeRoute.js';
 import globalErrorHandler from './middleware/globalErrorHandler.js';
 import attendanceRoute from './routes/attendanceRoute.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const server = express();
 const PORT = process.env.PORT;

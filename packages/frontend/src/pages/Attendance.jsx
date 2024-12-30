@@ -1,15 +1,3 @@
-/* 
-    Implementation: 
-         - Create API logic to check in and check out - Done
-         - Display success Popup when the user checks in or checks out
-         - Disable all buttons after user has checked in and out- done
-
-    Cases:
-        - Disable both attendance buttons during closing hours - Done
-        - Disable check out button if the user has not checked in - done
-        - Disable check in button if the user has already checked in - done
-*/
-
 import { useEffect, useState } from "react"
 import axios from "../utils/axiosConfig"
 import { Button, Avatar } from "@material-tailwind/react"
@@ -28,21 +16,20 @@ const AttendancePage = () => {
 
     const [isExistingRecordLoading, setIsExistingRecordLoading] = useState(false);
     const [existingRecordError, setExistingRecordError] = useState(null);
-    const [recordData, setRecordData] = useState({});
-
 
     const [isCheckedIn, setIsCheckedIn] = useState(false);
     const [isCheckedOut, setIsCheckedOut] = useState(false);
     const [error, setError] = useState(null);
+    const [successMsg, setSuccessMsg] = useState(null);
 
     const handleCheckIn = async () => {
         try {
             setIsCheckInLoading(true);
+
             const res = await axios.post("http://localhost:5001/api/v1/attendance/check-in");
-            console.log(res);
             setIsCheckedIn(true);
+            setSuccessMsg(res.data.message)
         } catch (error) {
-            console.log(error);
             setError(error.response?.data?.message || 'An error occurred during check-in');
         } finally {
             setIsCheckInLoading(false);
@@ -52,9 +39,10 @@ const AttendancePage = () => {
     const handleCheckOut = async () => {
         try {
             setIsCheckOutLoading(true);
+
             const res = await axios.put("http://localhost:5001/api/v1/attendance/check-out");
-            console.log(res);
             setIsCheckedOut(true);
+            setSuccessMsg(res.data?.message);
         } catch (error) {
             console.log(error);
             setError(error.response?.data?.message || 'An error occurred during check-out');
@@ -66,9 +54,9 @@ const AttendancePage = () => {
     const getExistingRecord = async () => {
         try {
             setIsExistingRecordLoading(true);
+
             const res = await axios.get("http://localhost:5001/api/v1/attendance/today");
-            console.log(res);
-            setRecordData(res.data);
+
             if (res.data.checkInTime && !res.data.checkOuTime) {
                 setIsCheckedIn(true);
                 setIsCheckedOut(false);
@@ -80,7 +68,6 @@ const AttendancePage = () => {
                 setIsCheckedOut(false);
             }
         } catch (error) {
-            console.log(error);
             setExistingRecordError(error.response?.data?.message || 'An error occurred while fetching the record');
         } finally {
             setIsExistingRecordLoading(false);
@@ -122,6 +109,7 @@ const AttendancePage = () => {
 
                 </section>
                 {error && <p className="text-red-500">{error}</p>}
+                {successMsg && <p className="text-blue-500">{successMsg}</p>}
                 {existingRecordError && <p className="text-red-500">{existingRecordError}</p>}
             </div>
         </main>

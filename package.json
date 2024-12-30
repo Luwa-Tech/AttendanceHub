@@ -5,8 +5,8 @@
   "workspaces": ["packages/*"],
   "scripts": {
     "start": "concurrently --kill-others-on-fail \"yarn backend\"  \"yarn frontend\"",
-    "seed": "yarn workspace backend seed",
-    "backend": "yarn workspace backend start",
+    "backend:seed": "yarn workspace backend seed",
+    "backend": "yarn workspace backend serve",
     "frontend": "yarn workspace frontend dev"
   },
   "keywords": [],

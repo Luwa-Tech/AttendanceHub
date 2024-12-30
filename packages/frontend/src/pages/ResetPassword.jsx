@@ -2,7 +2,7 @@ import { useParams, useLocation } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { useState, useEffect } from "react"
 import { ImSpinner } from "react-icons/im"
-import axios from "axios"
+import axios from "../utils/axiosConfig"
 import NotificationDialog from "../component/MessageModal"
 
 const ResetPasswordPage = () => {
@@ -26,7 +26,7 @@ const ResetPasswordPage = () => {
     const resetPassword = async (data) => {
         try {
             // Add Prod API URL -> Example: //`https://talentbridge.onrender.com/api/user/reset-password-with-token?token=${token}`
-            const response = await axios.post("", {
+            const response = await axios.post("http://localhost:5001/", {
                 newPassword: data.newPassword,
                 confirmPassword: data.confirmPassword
             })

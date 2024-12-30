@@ -4,7 +4,7 @@ import { AuthorizationError } from '../utils/errors.js';
 export const authorizeUser = (req, res, next) => {
     const token = req.cookies.access_token;
     if (!token) {
-        throw new AuthorizationError('User unauthorized');
+        throw new AuthorizationError('User unauthorized: No token assigned');
     }
 
     try {

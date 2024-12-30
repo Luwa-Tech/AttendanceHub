@@ -1,7 +1,7 @@
 import { NavLink, useNavigate, useLocation } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { ImSpinner } from "react-icons/im"
-import axios from "axios"
+import axios from "../utils/axiosConfig"
 import { useState, useEffect } from "react"
 import useAuth from "../hooks/useAuth"
 
@@ -28,10 +28,10 @@ const LoginPage = () => {
     const login = async (data) => {
         try {
             // change url to prod-url during deployment
-            const response = await axios.post("https://3e62-172-166-156-100.ngrok-free.app/login", {
+            const response = await axios.post("http://localhost:5001/login", {
                 id: data.ID,
                 password: data.password
-            })
+            });
 
             if (response.status === 200) {
                 setAuth(response.data.employee)
@@ -40,7 +40,7 @@ const LoginPage = () => {
             }
 
         } catch (error) {
-            setError(error.response.data.error)
+            setError(error.response?.data?.error)
         }
     }
 

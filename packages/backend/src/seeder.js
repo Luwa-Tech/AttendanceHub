@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import mongoose from "mongoose";
 import seedRoles from "./seeds/role.seed.js";
 import seedStatus from "./seeds/status.seed.js";

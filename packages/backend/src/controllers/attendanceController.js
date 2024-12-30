@@ -19,6 +19,19 @@ export class AttendanceController {
         res.status(200).json({ message: 'Check-out successful', record: updatedRecord });
     }
 
+    getExistingRecord = async (req, res) => {
+        const employeeId = req.user.id;
+        const today = new Date();
+        today.setHours(0,0,0,0);
+
+        const record = await this.attendanceService.getExistingRecord({
+            employeeId: employeeId,
+            checkInTime: { $gte: today }
+        });
+
+        res.status(200).send(record);
+    }
+
     //getByDate
     //getByStatus
     //getAll

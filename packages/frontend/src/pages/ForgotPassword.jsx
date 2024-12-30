@@ -1,6 +1,6 @@
 import { NavLink, useLocation } from "react-router-dom"
 import {useForm} from "react-hook-form"
-import axios from "axios"
+import axios from "../utils/axiosConfig"
 import {ImSpinner} from "react-icons/im"
 import { useState, useEffect } from "react"
 import NotificationDialog from "../component/MessageModal"
@@ -25,7 +25,7 @@ const ForgotPasswordPage = () => {
     const initPasswordReset = async (data) => {
         try {
             // Change to Production API URL
-            const response = await axios.post("https://3ad4-172-166-151-113.ngrok-free.app/generate-reset-token", {
+            const response = await axios.post("http://localhost:5001/generate-reset-token", {
                 id: data.ID
             })
             

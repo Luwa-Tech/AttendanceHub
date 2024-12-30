@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import 'express-async-errors';
 import ngrok from '@ngrok/ngrok';
 import express from 'express';
@@ -9,23 +10,21 @@ import authRoute from './routes/authRoute.js';
 import employeeRoute from './routes/employeeRoute.js';
 import globalErrorHandler from './middleware/globalErrorHandler.js';
 import attendanceRoute from './routes/attendanceRoute.js';
-import dotenv from 'dotenv';
-
-dotenv.config();
+import {corsOptions} from './config/corsOptions.js';
 
 const server = express();
 const PORT = process.env.PORT;
 
 connectToDB();
 
-server.use(cors());
+server.use(cors(corsOptions));
 server.use(cookieParser());
 server.use(express.static("public"));
 server.use(express.json());
 
 server.use('/', authRoute);
 server.use('/api/v1/employee/', employeeRoute);
-server.use('/api/v1/employee/', attendanceRoute);
+server.use('/api/v1/attendance/', attendanceRoute);
 
 server.use(globalErrorHandler);
 
@@ -37,5 +36,5 @@ mongoose.connection.once("open", () => {
 });
 
 // for development purposes
-ngrok.connect({ addr: PORT, authtoken_from_env: true })
-	.then(listener => console.log(`Ingress established at: ${listener.url()}`));
+// ngrok.connect({ addr: PORT, authtoken_from_env: true })
+// 	.then(listener => console.log(`Ingress established at: ${listener.url()}`));

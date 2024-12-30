@@ -18,8 +18,12 @@ export class AttendanceService {
         return attendance;
     }
 
-    getExistingCheckInRecord = async (existingRecord) => {
+    getExistingRecord = async (existingRecord) => {
         const record = await this.attendance.findOne(existingRecord);
+
+        if (!record) {
+            throw new NotFoundError('User has not check-in for today');
+        }
         return record;
     }
 
@@ -41,7 +45,7 @@ export class AttendanceService {
         const today = new Date();
         today.setHours(0, 0, 0, 0); // Set to start of the day
 
-        const existingRecord = await this.getExistingCheckInRecord({
+        const existingRecord = await this.attendance.findOne({
             employeeId: employeeId,
             checkInTime: { $gte: today }
         });
@@ -66,7 +70,7 @@ export class AttendanceService {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
-        const existingRecord = await this.getExistingCheckInRecord({
+        const existingRecord = await this.attendance.findOne({
             employeeId: employeeId,
             checkInTime: { $gte: today }
         });

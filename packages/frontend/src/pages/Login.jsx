@@ -1,4 +1,4 @@
-import { NavLink, useNavigate, useLocation } from "react-router-dom"
+import {NavLink, useNavigate, useLocation} from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { ImSpinner } from "react-icons/im"
 import axios from "../utils/axiosConfig"

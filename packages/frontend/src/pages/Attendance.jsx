@@ -68,6 +68,7 @@ const AttendancePage = () => {
                 setIsCheckedOut(false);
             }
         } catch (error) {
+            console.log(error)
             setExistingRecordError(error.response?.data?.message || 'An error occurred while fetching the record');
         } finally {
             setIsExistingRecordLoading(false);
@@ -110,7 +111,7 @@ const AttendancePage = () => {
                 </section>
                 {error && <p className="text-red-500">{error}</p>}
                 {successMsg && <p className="text-blue-500">{successMsg}</p>}
-                {existingRecordError && <p className="text-red-500">{existingRecordError}</p>}
+                {/* {existingRecordError && <p className="text-red-500">{existingRecordError}</p>} */}
             </div>
         </main>
 

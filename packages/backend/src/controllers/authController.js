@@ -24,7 +24,7 @@ export class AuthController {
         }
 
         const hashedPwd = await bcrypt.hash(data.password, 10);
-        const role = await this.roleService.getRole({name: data.role});
+        const role = await this.roleService.getRole({ name: data.role });
         const employeeId = await getNextSequenceValue('employeeId');
         const employeeDetails = {
             firstname: data.firstname,
@@ -43,17 +43,13 @@ export class AuthController {
             sent = await sendMail(result.email, template.subject, template.html);
         }
 
-        if (sent) {
-            res.status(201).json({ message: "New employee registered. Please check your email for login details", employee: result });
-        } else {
-            res.status(201).json({message: "Employee Created, But email was not successfully sent"})
-        }
+        res.status(201).json({ message: "New employee created: Check Email for detailed info" });
     }
 
     login = async (req, res) => {
         const data = matchedData(req);
         const findEmployee = await this.employeeService.getOne(data.id);
-        const role = await this.roleService.getRole({_id: findEmployee.roleId});
+        const role = await this.roleService.getRole({ _id: findEmployee.roleId });
 
         const match = await bcrypt.compare(data.password, findEmployee.password);
         if (!match) {
@@ -73,7 +69,7 @@ export class AuthController {
 
         const token = jwt.sign({ id: findEmployee._id, employeeId: findEmployee.employeeId, roleId: findEmployee.roleId }, process.env.ACCESS_KEY);
 
-        res.cookie('access_token', token, { httpOnly: true,  secure: process.env.NODE_ENV === 'production' }).status(200).json({ 'message': 'Employee logged in', employee});
+        res.cookie('access_token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' }).status(200).json({ 'message': 'Employee logged in', employee });
     }
 
     // Implement changePassword controller

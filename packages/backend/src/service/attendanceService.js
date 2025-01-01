@@ -34,7 +34,6 @@ export class AttendanceService {
         const closingHour = 16;
 
         const checkInHour = checkInTime.getHours();
-        console.log(checkInHour);
 
         // constraint checkIn to only office hours
         if (checkInHour < openingHour || checkInHour > closingHour) {
@@ -49,7 +48,6 @@ export class AttendanceService {
             employeeId: employeeId,
             checkInTime: { $gte: today }
         });
-        console.log(existingRecord);
 
         if (existingRecord) {
             throw new ExistingRecordError('Employee has already checked in for today');

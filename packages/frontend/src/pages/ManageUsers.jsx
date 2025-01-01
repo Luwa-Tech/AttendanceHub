@@ -6,70 +6,58 @@ import { PencilIcon, UserPlusIcon } from "@heroicons/react/24/solid";
 import {
     Card,
     CardHeader,
-    Input,
     Typography,
     Button,
     CardBody,
-    Chip,
-    CardFooter,
-    Tabs,
-    TabsHeader,
-    Tab,
     IconButton,
     Tooltip,
 } from "@material-tailwind/react";
+import { useState, useEffect } from "react";
+import axios from "../utils/axiosConfig";
+import RegisterUserModal from "../component/RegisterUserModal"
+import { ImSpinner } from "react-icons/im"
 
 
-const TABLE_HEAD = ["Employee", "Job Title", "Status", "Employed", ""];
-
-const TABLE_ROWS = [
-    {
-        name: "John Doe",
-        email: "johndoe@example.com",
-        job: "Manager",
-        org: "Organization",
-        online: true,
-        date: "23/04/18",
-    },
-    {
-        name: "Alexa Liras",
-        email: "alexa@creative-tim.com",
-        job: "Programator",
-        org: "Developer",
-        online: false,
-        date: "23/04/18",
-    },
-    {
-        name: "Laurent Perrier",
-        email: "laurent@creative-tim.com",
-        job: "Executive",
-        org: "Projects",
-        online: false,
-        date: "19/09/17",
-    },
-    {
-        name: "Michael Levi",
-        email: "michael@creative-tim.com",
-        job: "Programator",
-        org: "Developer",
-        online: true,
-        date: "24/12/08",
-    },
-    {
-        name: "Richard Gran",
-        email: "richard@creative-tim.com",
-        job: "Manager",
-        org: "Executive",
-        online: false,
-        date: "04/10/21",
-    },
-];
+const TABLE_HEAD = ["Employee", "Email", "Job Title", "Employed", ""];
 
 const ManageUsersPage = () => {
+    const [employees, setEmployees] = useState([]);
+    const [isEmployeesLoading, setIsEmployeesLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(!open)
+
+    const getEmployees = async () => {
+        try {
+            setIsEmployeesLoading(prev => !prev);
+
+            const res = await axios.get("http://localhost:5001/api/v1/employee/get-all-employees");
+            console.log(res)
+
+            const formattedData = res.data.map(employee => ({
+                name: `${employee.firstname} ${employee.lastname}`,
+                email: employee.email,
+                job: employee.jobTitle,
+                date: new Date(employee.createdAt).toLocaleDateString()
+            }))
+            setEmployees(formattedData)
+        } catch (error) {
+            console.log(error)
+            setError(error.response?.data?.message || 'An error occurred when getting employees')
+        } finally {
+            setIsEmployeesLoading(prev => !prev)
+        }
+    }
+
+    useEffect(() => {
+        getEmployees()
+    }, [])
+
     return (
         <Card className="h-full w-full">
             <CardHeader floated={false} shadow={false} className="rounded-none">
-                <div className="mb-8 flex items-center justify-between gap-8">
+                <div className="mb-[8rem] flex items-center justify-between gap-8">
                     <div>
                         <Typography variant="h5" color="blue-gray">
                             Employees list
@@ -79,52 +67,55 @@ const ManageUsersPage = () => {
                         </Typography>
                     </div>
                     <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
-                        <Button variant="outlined" className="border-2 " size="sm">
-                            view all
-                        </Button>
-                        <Button className="flex items-center gap-3 bg-button-400" size="sm">
-                            <UserPlusIcon strokeWidth={2} className="h-4 w-4" /> Add member
+                        {/* <Button className="flex items-center gap-3 bg-button-400" size="sm">
+                             view all
+                        </Button> */}
+                        <Button className="flex items-center gap-3 bg-button-400" size="sm" onClick={handleOpen}>
+                            <UserPlusIcon strokeWidth={2} className="h-4 w-4" /> Add employee
                         </Button>
                     </div>
                 </div>
             </CardHeader>
-            <CardBody className="overflow-scroll px-0">
-                <table className="mt-4 w-full min-w-max table-auto text-left">
-                    <thead>
-                        <tr>
-                            {TABLE_HEAD.map((head, index) => (
-                                <th
-                                    key={head}
-                                    className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50"
-                                >
-                                    <Typography
-                                        variant="small"
-                                        color="blue-gray"
-                                        className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
-                                    >
-                                        {head}{" "}
-                                        {index !== TABLE_HEAD.length - 1 && (
-                                            <ChevronUpDownIcon strokeWidth={2} className="h-4 w-4" />
-                                        )}
-                                    </Typography>
-                                </th>
-                            ))}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {TABLE_ROWS.map(
-                            ({ name, email, job, org, online, date }, index) => {
-                                const isLast = index === TABLE_ROWS.length - 1;
-                                const classes = isLast
-                                    ? "p-4"
-                                    : "p-4 border-b border-blue-gray-50";
+            {
+                isEmployeesLoading ? (
+                    <ImSpinner className="animate-spin w-7 h-7 flex justify-center items-center" />
+                ) : (
 
-                                return (
-                                    <tr key={name}>
-                                        <td className={classes}>
-                                            <div className="flex items-center gap-3">
+                    <CardBody className="overflow-scroll px-0">
+                        <table className="mt-4 w-full min-w-max table-auto text-left">
+                            <thead>
+                                <tr>
+                                    {TABLE_HEAD.map((head, index) => (
+                                        <th
+                                            key={head}
+                                            className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50"
+                                        >
+                                            <Typography
+                                                variant="small"
+                                                color="blue-gray"
+                                                className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
+                                            >
+                                                {head}{" "}
+                                                {index !== TABLE_HEAD.length - 1 && (
+                                                    <ChevronUpDownIcon strokeWidth={2} className="h-4 w-4" />
+                                                )}
+                                            </Typography>
+                                        </th>
+                                    ))}
+                                </tr>
+                            </thead>
 
-                                                <div className="flex flex-col">
+                            <tbody>
+                                {employees.map(
+                                    ({ name, email, job, date }, index) => {
+                                        const isLast = index === employees.length - 1;
+                                        const classes = isLast
+                                            ? "p-4"
+                                            : "p-4 border-b border-blue-gray-50";
+
+                                        return (
+                                            <tr key={name}>
+                                                <td className={classes}>
                                                     <Typography
                                                         variant="small"
                                                         color="blue-gray"
@@ -132,80 +123,61 @@ const ManageUsersPage = () => {
                                                     >
                                                         {name}
                                                     </Typography>
+
+                                                </td>
+                                                <td className={classes}>
+                                                    <div className="flex flex-col">
+                                                        <Typography
+                                                            variant="small"
+                                                            color="blue-gray"
+                                                            className="font-normal"
+                                                        >
+                                                            {email}
+                                                        </Typography>
+                                                    </div>
+                                                </td>
+                                                <td className={classes}>
                                                     <Typography
                                                         variant="small"
                                                         color="blue-gray"
-                                                        className="font-normal opacity-70"
+                                                        className="font-normal"
                                                     >
-                                                        {email}
+                                                        {job}
                                                     </Typography>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td className={classes}>
-                                            <div className="flex flex-col">
-                                                <Typography
-                                                    variant="small"
-                                                    color="blue-gray"
-                                                    className="font-normal"
-                                                >
-                                                    {job}
-                                                </Typography>
-                                                <Typography
-                                                    variant="small"
-                                                    color="blue-gray"
-                                                    className="font-normal opacity-70"
-                                                >
-                                                    {org}
-                                                </Typography>
-                                            </div>
-                                        </td>
-                                        <td className={classes}>
-                                            <div className="w-max">
-                                                <Chip
-                                                    variant="ghost"
-                                                    size="sm"
-                                                    value={online ? "online" : "offline"}
-                                                    color={online ? "green" : "blue-gray"}
-                                                />
-                                            </div>
-                                        </td>
-                                        <td className={classes}>
-                                            <Typography
-                                                variant="small"
-                                                color="blue-gray"
-                                                className="font-normal"
-                                            >
-                                                {date}
-                                            </Typography>
-                                        </td>
-                                        <td className={classes}>
-                                            <Tooltip content="Edit User">
-                                                <IconButton variant="text">
-                                                    <PencilIcon className="h-4 w-4" />
-                                                </IconButton>
-                                            </Tooltip>
-                                        </td>
-                                    </tr>
-                                );
-                            },
-                        )}
-                    </tbody>
-                </table>
-            </CardBody>
-            <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
-                <Typography variant="small" color="blue-gray" className="font-normal">
-                    Page 1 of 10
-                </Typography>
-                <div className="flex gap-2">
-                    <Button variant="outlined" size="sm">
-                        Previous
-                    </Button>
-                    <Button variant="outlined" size="sm">
-                        Next
-                    </Button>
-                </div>
-            </CardFooter>
+                                                </td>
+
+                                                <td className={classes}>
+                                                    <Typography
+                                                        variant="small"
+                                                        color="blue-gray"
+                                                        className="font-normal"
+                                                    >
+                                                        {date}
+                                                    </Typography>
+                                                </td>
+                                                <td className={classes}>
+                                                    <Tooltip content="Edit User">
+                                                        <IconButton variant="text">
+                                                            <PencilIcon className="h-4 w-4" />
+                                                        </IconButton>
+                                                    </Tooltip>
+                                                </td>
+                                            </tr>
+                                        );
+                                    },
+                                )}
+                            </tbody>
+                        </table>
+                    </CardBody>
+                )
+
+            }
+            <RegisterUserModal
+                handleOpen={handleOpen}
+                open={open}
+                getEmployees={getEmployees}
+                setOpen={setOpen}
+            />
         </Card>
     );
 }

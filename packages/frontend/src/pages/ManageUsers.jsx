@@ -56,8 +56,8 @@ const ManageUsersPage = () => {
 
     return (
         <Card className="h-full w-full">
-            <CardHeader floated={false} shadow={false} className="rounded-none">
-                <div className="mb-[8rem] flex items-center justify-between gap-8">
+            <CardHeader floated={false} shadow={false} className="rounded-none mb-[1.5rem] md:mb-[2rem]">
+                <div className="mb-[15rem] md:mb-[10rem] md:flex flex-col md:flex-row md:items-center md:justify-between md:gap-8">
                     <div>
                         <Typography variant="h5" color="blue-gray">
                             Employees list
@@ -66,11 +66,8 @@ const ManageUsersPage = () => {
                             See information about all employees
                         </Typography>
                     </div>
-                    <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
-                        {/* <Button className="flex items-center gap-3 bg-button-400" size="sm">
-                             view all
-                        </Button> */}
-                        <Button className="flex items-center gap-3 bg-button-400" size="sm" onClick={handleOpen}>
+                    <div>
+                        <Button className="flex items-center mt-2 md:mt-0 gap-3 bg-button-400" size="sm" onClick={handleOpen}>
                             <UserPlusIcon strokeWidth={2} className="h-4 w-4" /> Add employee
                         </Button>
                     </div>
@@ -78,7 +75,9 @@ const ManageUsersPage = () => {
             </CardHeader>
             {
                 isEmployeesLoading ? (
-                    <ImSpinner className="animate-spin w-7 h-7 flex justify-center items-center" />
+                    <div className="flex justify-center items-center h-64">
+                        <ImSpinner className="animate-spin w-7 h-7" />
+                    </div>
                 ) : (
 
                     <CardBody className="overflow-scroll px-0">

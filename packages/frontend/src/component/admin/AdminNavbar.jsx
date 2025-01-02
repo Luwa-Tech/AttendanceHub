@@ -5,8 +5,8 @@ import { AiOutlineClose } from 'react-icons/ai';
 const AdminNavbar = ({ isMobileSidebarCollapsed, toggleMobileSidebar }) => {
 
   return (
-    <header className="w-full bg-secondary-500 shadow p-4 sticky top-0 z-10">
-      <nav className="flex justify-between text-white items-center">
+    <header className="w-full bg-[#e7eaec] shadow p-4 sticky top-0 z-10">
+      <nav className="flex justify-between text-button-400 items-center">
         <div className="text-2xl font-bold">Dashboard</div>
 
         <span className="hidden md:block font-medium">John Richard</span>

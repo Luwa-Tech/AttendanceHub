@@ -10,6 +10,7 @@ import ManageUsersPage from "./pages/ManageUsers";
 import AttendancePage from "./pages/Attendance";
 import UpdateAttendancePage from "./pages/UpdateAttendance";
 import ViewAttendancePage from "./pages/ViewAttendance";
+import ProtectedRoute from "./component/ProtectedRoute";
 
 const App = () => {
 
@@ -21,14 +22,17 @@ const App = () => {
       <Route>
         <Route path="/" element={<LoginPage />} />
 
-        <Route path="/attendance" element={<Layout />}>
-          <Route index element={<AttendancePage />} />
-        </Route>
 
-        <Route path="/admin" element={<AdminLayout />}>
-          <Route index element={<ManageUsersPage />} />
-          <Route path="/admin/view_attendance" element={<ViewAttendancePage />} />
-          <Route path="/admin/update_attendance" element={<UpdateAttendancePage />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/attendance" element={<Layout />}>
+            <Route index element={<AttendancePage />} />
+          </Route>
+
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<ManageUsersPage />} />
+            <Route path="/admin/view_attendance" element={<ViewAttendancePage />} />
+            <Route path="/admin/update_attendance" element={<UpdateAttendancePage />} />
+          </Route>
         </Route>
 
         <Route path="/forgot_password" element={<ForgotPasswordPage />} />

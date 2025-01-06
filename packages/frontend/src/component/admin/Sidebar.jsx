@@ -1,14 +1,12 @@
 import SidebarItem from "./SidebarItem";
 import { MdManageAccounts, MdOutlineUpdate, MdViewList } from "react-icons/md";
 import { FaChevronRight, FaChevronLeft  } from "react-icons/fa";
-//import useRenderHook from "../../hooks/useRenderHook";
 
 const Sidebar = ({ isCollapsed, isMobileSidebarVisible, toggleSidebar }) => {
-  //const {isMobile} = useRenderHook();
   const sidebarItems = [
-    { href: "/admin_dashboard/", label: "Employees", icon: < MdManageAccounts className="text-button-400 w-7 h-7"/>},
-    { href: "/admin_dashboard/view_attendance", label: "View", icon: < MdViewList className="text-button-400 w-7 h-7"/>},
-    { href: "/admin_dashboard/update_attendance", label: "Update", icon: < MdOutlineUpdate className="text-button-400 w-7 h-7"/>},
+    { href: "/admin", label: "Employees", icon: < MdManageAccounts className="text-button-400 w-7 h-7"/>, end: true},
+    { href: "/admin/view_attendance", label: "View", icon: < MdViewList className="text-button-400 w-7 h-7"/>, end: false},
+    { href: "/admin/update_attendance", label: "Update", icon: < MdOutlineUpdate className="text-button-400 w-7 h-7"/>, end: false},
   ];
 
   return (
@@ -25,7 +23,7 @@ const Sidebar = ({ isCollapsed, isMobileSidebarVisible, toggleSidebar }) => {
       <nav className="mt-[1.2rem] md:mt-[5rem]">
         <ul>
           {sidebarItems.map((item) => (
-            <SidebarItem key={item.href} href={item.href} label={item.label} isCollapsed={isCollapsed} icon={item.icon} />
+            <SidebarItem key={item.href} href={item.href} label={item.label} isCollapsed={isCollapsed} icon={item.icon} end={item.end} />
           ))}
         </ul>
       </nav>

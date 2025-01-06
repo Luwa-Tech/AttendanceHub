@@ -2,7 +2,6 @@ import {
     MagnifyingGlassIcon,
     ChevronUpDownIcon,
 } from "@heroicons/react/24/outline";
-import { PencilIcon, UserPlusIcon } from "@heroicons/react/24/solid";
 import {
     Card,
     CardHeader,
@@ -10,202 +9,220 @@ import {
     Typography,
     Button,
     CardBody,
-    Chip,
-    CardFooter,
-    Tabs,
-    TabsHeader,
-    Tab,
-    IconButton,
-    Tooltip,
+    Chip
 } from "@material-tailwind/react";
+import { useState, useEffect } from "react";
+import axios from "../utils/axiosConfig";
+import { ImSpinner } from "react-icons/im";
+import { format, parseISO } from 'date-fns';
 
 
-const TABLE_HEAD = ["Member", "Function", "Status", "Employed", ""];
+const TABLE_HEAD = ["ID", "Name", "Job Title", "Check-in", "Check-out", "Status", "Date", ""];
 
-const TABLE_ROWS = [
-    {
-        name: "John Michael",
-        email: "john@creative-tim.com",
-        job: "Manager",
-        org: "Organization",
-        online: true,
-        date: "23/04/18",
-    },
-    {
-        name: "Alexa Liras",
-        email: "alexa@creative-tim.com",
-        job: "Programator",
-        org: "Developer",
-        online: false,
-        date: "23/04/18",
-    },
-    {
-        name: "Laurent Perrier",
-        email: "laurent@creative-tim.com",
-        job: "Executive",
-        org: "Projects",
-        online: false,
-        date: "19/09/17",
-    },
-    {
-        name: "Michael Levi",
-        email: "michael@creative-tim.com",
-        job: "Programator",
-        org: "Developer",
-        online: true,
-        date: "24/12/08",
-    },
-    {
-        name: "Richard Gran",
-        email: "richard@creative-tim.com",
-        job: "Manager",
-        org: "Executive",
-        online: false,
-        date: "04/10/21",
-    },
-];
+/*
+    Additional Implementation:
+        - If filtering by month, display records for the entire month selected
+            in a pagination form
+ */
 
 const ViewAttendancePage = () => {
+    const [attendance, setAttendance] = useState([]);
+    const [isAttendanceLoading, setIsAttendanceLoading] = useState(false);
+    const [filterDate, setFilterDate] = useState('');
+
+    const getCurrentDayAttendance = async () => {
+        try {
+            setIsAttendanceLoading(true);
+            const res = await axios.get("http://localhost:5001/api/v1/attendance/current");
+            console.log(res)
+            setAttendance(res.data);
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setIsAttendanceLoading(false);
+        }
+    };
+
+    const getAttendanceByDate = async (date) => {
+        try {
+            setIsAttendanceLoading(true);
+            const res = await axios.get("http://localhost:5001/api/v1/attendance/filter-by-date", {
+                params: { date }
+            });
+            setAttendance(res.data);
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setIsAttendanceLoading(false);
+        }
+    };
+
+    const handleFilter = () => {
+        if (filterDate) {
+            getAttendanceByDate(filterDate);
+        }
+    };
+
+    useEffect(() => {
+        getCurrentDayAttendance()
+    }, [])
+
     return (
         <Card className="h-full w-full">
-            <CardHeader floated={false} shadow={false} className="rounded-none">
-                <div className="mb-8 flex items-center justify-between gap-8">
+            <CardHeader floated={false} shadow={false} className="rounded-none mb-[1.5rem] md:mb-[2rem]">
+                <div className="mb-[7rem] md:mb-[2rem] md:flex flex-col md:flex-row md:items-center md:justify-between md:gap-8">
                     <div>
                         <Typography variant="h5" color="blue-gray">
-                            Employees list
+                            Attendance List
                         </Typography>
                         <Typography color="gray" className="mt-1 font-normal">
-                            See information about all employees
+                            See attendance information for the selected date or month
                         </Typography>
                     </div>
-                    <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
-                        <Button variant="outlined" size="sm">
-                            view all
-                        </Button>
-                        <Button className="flex items-center gap-3" size="sm">
-                            <UserPlusIcon strokeWidth={2} className="h-4 w-4" /> Add member
+                    <div className="flex items-center flex-col md:flex-row gap-4">
+                        <Input
+                            type="date"
+                            value={filterDate}
+                            onChange={(e) => setFilterDate(e.target.value)}
+                            className="border-2 p-2 rounded"
+                        />
+                        <Button className="bg-button-400" size="sm" onClick={handleFilter}>
+                            Filter
                         </Button>
                     </div>
                 </div>
             </CardHeader>
-            <CardBody className="overflow-scroll px-0">
-                <table className="mt-4 w-full min-w-max table-auto text-left">
-                    <thead>
-                        <tr>
-                            {TABLE_HEAD.map((head, index) => (
-                                <th
-                                    key={head}
-                                    className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50"
-                                >
-                                    <Typography
-                                        variant="small"
-                                        color="blue-gray"
-                                        className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
-                                    >
-                                        {head}{" "}
-                                        {index !== TABLE_HEAD.length - 1 && (
-                                            <ChevronUpDownIcon strokeWidth={2} className="h-4 w-4" />
-                                        )}
+
+            {
+                isAttendanceLoading ? (
+                    <div className="flex justify-center items-center h-60">
+                        <ImSpinner className="animate-spin w-7 h-7" />
+                    </div>
+                ) : (
+
+                    <CardBody className="overflow-scroll px-0">
+                        {
+                            attendance.length === 0 ? (
+                                <div className="flex justify-center items-center h-64">
+                                    <Typography variant="h6" color="gray">
+                                        No attendance records found.
                                     </Typography>
-                                </th>
-                            ))}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {TABLE_ROWS.map(
-                            ({ name, email, job, org, online, date }, index) => {
-                                const isLast = index === TABLE_ROWS.length - 1;
-                                const classes = isLast
-                                    ? "p-4"
-                                    : "p-4 border-b border-blue-gray-50";
+                                </div>
+                            ) : (
 
-                                return (
-                                    <tr key={name}>
-                                        <td className={classes}>
-                                            <div className="flex items-center gap-3">
-
-                                                <div className="flex flex-col">
+                                <table className="mt-4 w-full min-w-max table-auto text-left">
+                                    <thead>
+                                        <tr>
+                                            {TABLE_HEAD.map((head, index) => (
+                                                <th
+                                                    key={head}
+                                                    className="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50"
+                                                >
                                                     <Typography
                                                         variant="small"
                                                         color="blue-gray"
-                                                        className="font-normal"
+                                                        className="flex items-center justify-between gap-2 font-normal leading-none opacity-70"
                                                     >
-                                                        {name}
+                                                        {head}{" "}
+                                                        {index !== TABLE_HEAD.length - 1 && (
+                                                            <ChevronUpDownIcon strokeWidth={2} className="h-4 w-4" />
+                                                        )}
                                                     </Typography>
-                                                    <Typography
-                                                        variant="small"
-                                                        color="blue-gray"
-                                                        className="font-normal opacity-70"
-                                                    >
-                                                        {email}
-                                                    </Typography>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td className={classes}>
-                                            <div className="flex flex-col">
-                                                <Typography
-                                                    variant="small"
-                                                    color="blue-gray"
-                                                    className="font-normal"
-                                                >
-                                                    {job}
-                                                </Typography>
-                                                <Typography
-                                                    variant="small"
-                                                    color="blue-gray"
-                                                    className="font-normal opacity-70"
-                                                >
-                                                    {org}
-                                                </Typography>
-                                            </div>
-                                        </td>
-                                        <td className={classes}>
-                                            <div className="w-max">
-                                                <Chip
-                                                    variant="ghost"
-                                                    size="sm"
-                                                    value={online ? "online" : "offline"}
-                                                    color={online ? "green" : "blue-gray"}
-                                                />
-                                            </div>
-                                        </td>
-                                        <td className={classes}>
-                                            <Typography
-                                                variant="small"
-                                                color="blue-gray"
-                                                className="font-normal"
-                                            >
-                                                {date}
-                                            </Typography>
-                                        </td>
-                                        <td className={classes}>
-                                            <Tooltip content="Edit User">
-                                                <IconButton variant="text">
-                                                    <PencilIcon className="h-4 w-4" />
-                                                </IconButton>
-                                            </Tooltip>
-                                        </td>
-                                    </tr>
-                                );
-                            },
-                        )}
-                    </tbody>
-                </table>
-            </CardBody>
-            <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
-                <Typography variant="small" color="blue-gray" className="font-normal">
-                    Page 1 of 10
-                </Typography>
-                <div className="flex gap-2">
-                    <Button variant="outlined" size="sm">
-                        Previous
-                    </Button>
-                    <Button variant="outlined" size="sm">
-                        Next
-                    </Button>
-                </div>
-            </CardFooter>
+                                                </th>
+                                            ))}
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        {attendance.map(
+                                            ({ employeeDeptId, name, jobTitle, checkIn, checkOut, status, date }, index) => {
+                                                const isLast = index === attendance.length - 1;
+                                                const classes = isLast
+                                                    ? "p-4"
+                                                    : "p-4 border-b border-blue-gray-50";
+
+                                                return (
+                                                    <tr key={employeeDeptId}>
+                                                        <td className={classes}>
+                                                            <Typography
+                                                                variant="small"
+                                                                color="blue-gray"
+                                                                className="font-normal"
+                                                            >
+                                                                {employeeDeptId}
+                                                            </Typography>
+
+                                                        </td>
+                                                        <td className={classes}>
+                                                            <div className="flex flex-col">
+                                                                <Typography
+                                                                    variant="small"
+                                                                    color="blue-gray"
+                                                                    className="font-normal"
+                                                                >
+                                                                    {name}
+                                                                </Typography>
+                                                            </div>
+                                                        </td>
+                                                        <td className={classes}>
+                                                            <Typography
+                                                                variant="small"
+                                                                color="blue-gray"
+                                                                className="font-normal"
+                                                            >
+                                                                {jobTitle}
+                                                            </Typography>
+                                                        </td>
+
+                                                        <td className={classes}>
+                                                            <Typography
+                                                                variant="small"
+                                                                color="blue-gray"
+                                                                className="font-normal"
+                                                            >
+                                                                {checkIn ? format(parseISO(checkIn), 'HH:mm') : 'N/A'}
+                                                            </Typography>
+                                                        </td>
+                                                        <td className={classes}>
+                                                            <Typography
+                                                                variant="small"
+                                                                color="blue-gray"
+                                                                className="font-normal"
+                                                            >
+                                                                {checkOut ? format(parseISO(checkOut), 'HH:mm') : 'N/A'}
+                                                            </Typography>
+                                                        </td>
+                                                        <td className={classes}>
+                                                            <div className="w-max">
+                                                                <Chip
+                                                                    size="sm"
+                                                                    variant="ghost"
+                                                                    value={status}
+                                                                    color={status === "Present" ? "green" : "red"}
+                                                                />
+                                                            </div>
+                                                        </td>
+                                                        <td className={classes}>
+                                                            <Typography
+                                                                variant="small"
+                                                                color="blue-gray"
+                                                                className="font-normal"
+                                                            >
+                                                                {format(parseISO(date), 'yyyy-MM-dd')}
+                                                            </Typography>
+                                                        </td>
+                                                    </tr>
+                                                );
+                                            },
+                                        )}
+                                    </tbody>
+                                </table>
+                            )}
+                    </CardBody>
+                )
+
+            }
+
         </Card>
     );
 }

@@ -30,7 +30,7 @@ const AttendancePage = () => {
             setIsCheckedIn(true);
             setSuccessMsg(res.data.message)
         } catch (error) {
-            setError(error.response?.data?.message || 'An error occurred during check-in');
+            setError(error.response?.data?.error || 'An error occurred during check-in');
         } finally {
             setIsCheckInLoading(false);
         }
@@ -45,7 +45,7 @@ const AttendancePage = () => {
             setSuccessMsg(res.data?.message);
         } catch (error) {
             console.log(error);
-            setError(error.response?.data?.message || 'An error occurred during check-out');
+            setError(error.response?.data?.error || 'An error occurred during check-out');
         } finally {
             setIsCheckOutLoading(false);
         }
@@ -55,7 +55,7 @@ const AttendancePage = () => {
         try {
             setIsExistingRecordLoading(true);
 
-            const res = await axios.get("http://localhost:5001/api/v1/attendance/today");
+            const res = await axios.get("http://localhost:5001/api/v1/attendance/check");
 
             if (res.data.checkInTime && !res.data.checkOuTime) {
                 setIsCheckedIn(true);
@@ -69,7 +69,7 @@ const AttendancePage = () => {
             }
         } catch (error) {
             console.log(error)
-            setExistingRecordError(error.response?.data?.message || 'An error occurred while fetching the record');
+            setExistingRecordError(error.response?.data?.error || 'An error occurred while fetching the record');
         } finally {
             setIsExistingRecordLoading(false);
         }

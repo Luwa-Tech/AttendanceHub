@@ -22,18 +22,24 @@ export class AttendanceController {
     getExistingRecord = async (req, res) => {
         const employeeId = req.user.id;
         const today = new Date();
-        today.setHours(0,0,0,0);
+        today.setHours(0, 0, 0, 0);
 
         const record = await this.attendanceService.getExistingRecord({
             employeeId: employeeId,
             checkInTime: { $gte: today }
         });
 
-        res.status(200).send(record);
+        res.status(200).json(record);
     }
 
-    //getByDate
-    //getByStatus
-    //getAll
-    //getCurrent
+    getCurrent = async (req, res) => {
+        const result = await this.attendanceService.getCurrentDayAttendance();
+        res.status(200).send(result);
+    }
+
+    getByDate = async (req, res) => {
+        const { date } = req.query;
+        const result = await this.attendanceService.filterAttendanceByDate(date);
+        res.status(200).json(result)
+    }
 }

@@ -17,9 +17,9 @@ export class AuthorizationError extends CustomError {
 }
 
 export class NotFoundError extends CustomError {
-    constructor(message = 'Not found Error', details = '') {
+    constructor(message = 'Not found Error', statusCode = 404, details = '') {
         super(message);
-        this.statusCode = 404;
+        this.statusCode = statusCode;
         this.details = details;
     }
 };

@@ -17,7 +17,6 @@ import axios from "../utils/axiosConfig";
 import RegisterUserModal from "../component/RegisterUserModal"
 import { ImSpinner } from "react-icons/im"
 
-
 const TABLE_HEAD = ["Employee", "Email", "Job Title", "Employed", ""];
 
 const ManageUsersPage = () => {
@@ -33,7 +32,6 @@ const ManageUsersPage = () => {
             setIsEmployeesLoading(prev => !prev);
 
             const res = await axios.get("http://localhost:5001/api/v1/employee/get-all-employees");
-            console.log(res)
 
             const formattedData = res.data.map(employee => ({
                 name: `${employee.firstname} ${employee.lastname}`,
@@ -57,7 +55,7 @@ const ManageUsersPage = () => {
     return (
         <Card className="h-full w-full">
             <CardHeader floated={false} shadow={false} className="rounded-none mb-[1.5rem] md:mb-[2rem]">
-                <div className="mb-[15rem] md:mb-[10rem] md:flex flex-col md:flex-row md:items-center md:justify-between md:gap-8">
+                <div className="mb-[7rem] md:mb-[2rem] md:flex flex-col md:flex-row md:items-center md:justify-between md:gap-8">
                     <div>
                         <Typography variant="h5" color="blue-gray">
                             Employees list
@@ -73,9 +71,10 @@ const ManageUsersPage = () => {
                     </div>
                 </div>
             </CardHeader>
+            
             {
                 isEmployeesLoading ? (
-                    <div className="flex justify-center items-center h-64">
+                    <div className="flex justify-center items-center h-60">
                         <ImSpinner className="animate-spin w-7 h-7" />
                     </div>
                 ) : (

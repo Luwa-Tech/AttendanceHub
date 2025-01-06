@@ -15,7 +15,6 @@ const seedEmployees = async () => {
             acc[role.name] = role._id;
             return acc;
         }, {});
-        console.log('Role Map:', roleMap);
 
         // Format employees to replace roleId with the corresponding _id from roleMap
         const formattedEmployees = employees.map(employee => ({

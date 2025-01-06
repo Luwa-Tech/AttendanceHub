@@ -7,11 +7,11 @@ const attendanceSchema = new mongoose.Schema({
         required: true
     },
 
-    // statusId: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'Status',
-    //     required: true
-    // },
+    statusId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Status',
+        required: true
+    },
 
     checkInTime: {
         type: Date,
@@ -21,17 +21,7 @@ const attendanceSchema = new mongoose.Schema({
     checkOutTime: {
         type: Date,
         required: false
-    },
-
-    // createdAt: {
-    //     default: Date.now,
-    //     type: Date
-    // },
-
-    // updatedAt: {
-    //     default: Date.now,
-    //     type: Date
-    // }
+    }
 }, {timestamps: true});
 
 const Attendance = mongoose.model('Attendance', attendanceSchema);

@@ -47,7 +47,7 @@ const Header = () => {
                 }
                 <nav className={`bg-[#b3b3ca] text-button-400 md:text-button-400 md:bg-transparent flex flex-col md:flex-row gap-8 md:gap-0 md:justify-end items-center md:w-full fixed md:static pt-20 md:pt-0 transition-all duration-[0.15s] mobile-nav ease-in md:z-auto z-[20] ${toggle ? "right-0" : "right-[-100%]"}`}>
                     <ul className="flex flex-col gap-4 md:gap-4 md:flex-row items-center">
-                        <li onClick={closeToggle}><NavLink to="/admin_dashboard" className="nav-links text-button-400">Dashboard</NavLink></li>
+                        <li onClick={closeToggle}><NavLink to="/admin" className="nav-links text-button-400">Dashboard</NavLink></li>
                         <li onClick={logout} className="text-[1rem] font-bold md:font-normal cursor-pointer hover:opacity-[0.6] px-4 py-2 rounded-[.2rem] bg-primary-600 text-primary-500">{
                             isLogoutLoading ? "loading.." : "Logout"
                         }</li>

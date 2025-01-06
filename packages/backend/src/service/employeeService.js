@@ -14,15 +14,6 @@ class EmployeeService {
         return employee;
     }
 
-    // getOneByEmail = async (email) => {
-    //     const employee = await this.checkEmail(email);
-    //     if (!employee) {
-    //         throw new NotFoundError(`Employee with email: ${email} not found`);
-    //     };
-
-    //     return employee;
-    // }
-
     getOne = async (id) => {
         const employee = await this.employee.findOne({employeeId: id}).exec();
         if (!employee) {
@@ -54,8 +45,8 @@ class EmployeeService {
 
     getAll = async () => {
         const employees = await this.employee.find({});
-        if (!employees) {
-            throw new NotFoundError('No employees found');
+        if (employees.length === 0) {
+            throw new NotFoundError('No employees found', 204);
         }
 
         return employees;

@@ -28,9 +28,6 @@ export const status = [
         "name": "Present"
     },
     {
-        "name": "Late"
-    },
-    {
         "name": "Absent"
     }
 ]

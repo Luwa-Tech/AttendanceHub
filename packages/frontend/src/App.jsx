@@ -25,10 +25,10 @@ const App = () => {
           <Route index element={<AttendancePage />} />
         </Route>
 
-        <Route path="/admin_dashboard" element={<AdminLayout />}>
+        <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<ManageUsersPage />} />
-          <Route path="/admin_dashboard/view_attendance" element={<UpdateAttendancePage />} />
-          <Route path="/admin_dashboard/update_attendance" element={<ViewAttendancePage />} />
+          <Route path="/admin/view_attendance" element={<ViewAttendancePage />} />
+          <Route path="/admin/update_attendance" element={<UpdateAttendancePage />} />
         </Route>
 
         <Route path="/forgot_password" element={<ForgotPasswordPage />} />

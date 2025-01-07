@@ -29,15 +29,16 @@ const ViewAttendancePage = () => {
     const [attendance, setAttendance] = useState([]);
     const [isAttendanceLoading, setIsAttendanceLoading] = useState(false);
     const [filterDate, setFilterDate] = useState('');
+    const [error, setError] = useState(null);
 
     const getCurrentDayAttendance = async () => {
         try {
             setIsAttendanceLoading(true);
             const res = await axios.get("http://localhost:5001/api/v1/attendance/current");
-            console.log(res)
             setAttendance(res.data);
         } catch (error) {
             console.log(error);
+            setError(error.response?.data?.error || 'An error occurred when getting current day attendance')
         } finally {
             setIsAttendanceLoading(false);
         }
@@ -52,6 +53,7 @@ const ViewAttendancePage = () => {
             setAttendance(res.data);
         } catch (error) {
             console.log(error);
+            setError(error.response?.data?.error || 'An error occurred when getting attendance')
         } finally {
             setIsAttendanceLoading(false);
         }
@@ -69,8 +71,8 @@ const ViewAttendancePage = () => {
 
     return (
         <Card className="h-full w-full">
-            <CardHeader floated={false} shadow={false} className="rounded-none mb-[1.5rem] md:mb-[2rem]">
-                <div className="mb-[7rem] md:mb-[2rem] md:flex flex-col md:flex-row md:items-center md:justify-between md:gap-8">
+            <CardHeader floated={false} shadow={false} className="rounded-none">
+                <div className="mb-[7rem] md:mb-[7rem] md:flex flex-col md:flex-row md:items-center md:justify-between md:gap-8">
                     <div>
                         <Typography variant="h5" color="blue-gray">
                             Attendance List
@@ -79,14 +81,14 @@ const ViewAttendancePage = () => {
                             See attendance information for the selected date or month
                         </Typography>
                     </div>
-                    <div className="flex items-center flex-col md:flex-row gap-4">
+                    <div className="flex md:items-center items-left flex-col md:flex-row gap-4">
                         <Input
                             type="date"
                             value={filterDate}
                             onChange={(e) => setFilterDate(e.target.value)}
-                            className="border-2 p-2 rounded"
+                            className="border-2 p-2 rounded md:w-[2rem]"
                         />
-                        <Button className="bg-button-400" size="sm" onClick={handleFilter}>
+                        <Button className="bg-button-400 text-center w-[4.5rem]" size="sm" onClick={handleFilter}>
                             Filter
                         </Button>
                     </div>
@@ -100,7 +102,7 @@ const ViewAttendancePage = () => {
                     </div>
                 ) : (
 
-                    <CardBody className="overflow-scroll px-0">
+                    <CardBody className="overflow-scroll mt-6 px-0">
                         {
                             attendance.length === 0 ? (
                                 <div className="flex justify-center items-center h-64">
@@ -110,7 +112,7 @@ const ViewAttendancePage = () => {
                                 </div>
                             ) : (
 
-                                <table className="mt-4 w-full min-w-max table-auto text-left">
+                                <table className="w-full min-w-max table-auto text-left">
                                     <thead>
                                         <tr>
                                             {TABLE_HEAD.map((head, index) => (

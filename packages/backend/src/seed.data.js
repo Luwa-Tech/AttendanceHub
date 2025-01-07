@@ -46,7 +46,7 @@ export const employees = [
         "firstname": "jane",
         "lastname": "smith",
         "email": "janesmith@example.com",
-        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOJRCHVKqagAC",
+        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOUJRCHVKqagAC",
         "jobTitle": "Supervisor",
         "roleId": "time-keeper",
         "employeeId": 182871
@@ -55,7 +55,7 @@ export const employees = [
         "firstname": "alice",
         "lastname": "johnson",
         "email": "alicejohnson@example.com",
-        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOJRCHVKqagAC",
+        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOUJRCHVKqagAC",
         "jobTitle": "Supervisor",
         "roleId": "time-keeper",
         "employeeId": 182872
@@ -64,7 +64,7 @@ export const employees = [
         "firstname": "Bob",
         "lastname": "Brown",
         "email": "bobbrown@example.com",
-        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOJRCHVKqagAC",
+        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOUJRCHVKqagAC",
         "jobTitle": "BP-Assistant",
         "roleId": "worker",
         "employeeId": 182873
@@ -73,7 +73,7 @@ export const employees = [
         "firstname": "Charlie",
         "lastname": "Davis",
         "email": "charliedavis@example.com",
-        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOJRCHVKqagAC",
+        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOUJRCHVKqagAC",
         "jobTitle": "BP-Operator",
         "roleId": "worker",
         "employeeId": 182874
@@ -82,7 +82,7 @@ export const employees = [
         "firstname": "David",
         "lastname": "Evans",
         "email": "davidevans@example.com",
-        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOJRCHVKqagAC",
+        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOUJRCHVKqagAC",
         "jobTitle": "Casual",
         "roleId": "worker",
         "employeeId": 182875
@@ -91,7 +91,7 @@ export const employees = [
         "firstname": "Eve",
         "lastname": "Foster",
         "email": "evefoster@example.com",
-        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOJRCHVKqagAC",
+        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOUJRCHVKqagAC",
         "jobTitle": "Casual",
         "roleId": "worker",
         "employeeId": 182876
@@ -100,7 +100,7 @@ export const employees = [
         "firstname": "Frank",
         "lastname": "Green",
         "email": "frankgreen@example.com",
-        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOJRCHVKqagAC",
+        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOUJRCHVKqagAC",
         "jobTitle": "BP-Assistant",
         "roleId": "worker",
         "employeeId": 182877
@@ -109,7 +109,7 @@ export const employees = [
         "firstname": "Grace",
         "lastname": "Harris",
         "email": "graceharris@example.com",
-        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOJRCHVKqagAC",
+        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOUJRCHVKqagAC",
         "jobTitle": "Researcher",
         "roleId": "worker",
         "employeeId": 182878
@@ -118,7 +118,7 @@ export const employees = [
         "firstname": "Hank",
         "lastname": "Ivy",
         "email": "hankivy@example.com",
-        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOJRCHVKqagAC",
+        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOUJRCHVKqagAC",
         "jobTitle": "BP-Operator",
         "roleId": "worker",
         "employeeId": 182879
@@ -127,7 +127,7 @@ export const employees = [
         "firstname": "Ivy",
         "lastname": "Jones",
         "email": "ivyjones@example.com",
-        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOJRCHVKqagAC",
+        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOUJRCHVKqagAC",
         "jobTitle": "Casual",
         "roleId": "worker",
         "employeeId": 182880
@@ -136,7 +136,7 @@ export const employees = [
         "firstname": "Jack",
         "lastname": "King",
         "email": "jackking@example.com",
-        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOJRCHVKqagAC",
+        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOUJRCHVKqagAC",
         "jobTitle": "Forklift Operator",
         "roleId": "worker",
         "employeeId": 182881
@@ -145,7 +145,7 @@ export const employees = [
         "firstname": "Karen",
         "lastname": "Lewis",
         "email": "karenlewis@example.com",
-        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOJRCHVKqagAC",
+        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOUJRCHVKqagAC",
         "jobTitle": "Electrician",
         "roleId": "worker",
         "employeeId": 182882
@@ -154,7 +154,7 @@ export const employees = [
         "firstname": "Larry",
         "lastname": "Miller",
         "email": "larrymiller@example.com",
-        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOJRCHVKqagAC",
+        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOUJRCHVKqagAC",
         "jobTitle": "Electrician",
         "roleId": "worker",
         "employeeId": 182883
@@ -163,7 +163,7 @@ export const employees = [
         "firstname": "Mona",
         "lastname": "Nelson",
         "email": "monanelson@example.com",
-        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOJRCHVKqagAC",
+        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOUJRCHVKqagAC",
         "jobTitle": "Casual",
         "roleId": "worker",
         "employeeId": 182884
@@ -172,7 +172,7 @@ export const employees = [
         "firstname": "Nina",
         "lastname": "Owens",
         "email": "ninaowens@example.com",
-        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOJRCHVKqagAC",
+        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOUJRCHVKqagAC",
         "jobTitle": "Truck Driver",
         "roleId": "worker",
         "employeeId": 182885
@@ -181,7 +181,7 @@ export const employees = [
         "firstname": "Oscar",
         "lastname": "Parker",
         "email": "oscarparker@example.com",
-        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOJRCHVKqagAC",
+        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOUJRCHVKqagAC",
         "jobTitle": "BP-Operator",
         "roleId": "worker",
         "employeeId": 182886
@@ -190,7 +190,7 @@ export const employees = [
         "firstname": "Paul",
         "lastname": "Quinn",
         "email": "paulquinn@example.com",
-        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOJRCHVKqagAC",
+        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOUJRCHVKqagAC",
         "jobTitle": "Casual",
         "roleId": "worker",
         "employeeId": 182887
@@ -199,7 +199,7 @@ export const employees = [
         "firstname": "Quincy",
         "lastname": "Reed",
         "email": "quincyreed@example.com",
-        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOJRCHVKqagAC",
+        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOUJRCHVKqagAC",
         "jobTitle": "Data Analyst",
         "roleId": "worker",
         "employeeId": 182888
@@ -208,7 +208,7 @@ export const employees = [
         "firstname": "Rachel",
         "lastname": "Scott",
         "email": "rachelscott@example.com",
-        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOJRCHVKqagAC",
+        "password": "$2b$10$XVWCYCHQiJ56jsPiu6VeQOZ.ETHZhfvLZB67.ZWDOUJRCHVKqagAC",
         "jobTitle": "Casual",
         "roleId": "worker",
         "employeeId": 182889

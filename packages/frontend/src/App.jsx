@@ -8,7 +8,6 @@ import ResetPasswordPage from "./pages/ResetPassword";
 import AdminLayout from "./component/admin/AdminLayout";
 import ManageUsersPage from "./pages/ManageUsers";
 import AttendancePage from "./pages/Attendance";
-import UpdateAttendancePage from "./pages/UpdateAttendance";
 import ViewAttendancePage from "./pages/ViewAttendance";
 import ProtectedRoute from "./component/ProtectedRoute";
 
@@ -31,7 +30,6 @@ const App = () => {
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<ManageUsersPage />} />
             <Route path="/admin/view_attendance" element={<ViewAttendancePage />} />
-            <Route path="/admin/update_attendance" element={<UpdateAttendancePage />} />
           </Route>
         </Route>
 

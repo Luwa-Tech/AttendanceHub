@@ -41,8 +41,7 @@ const ManageUsersPage = () => {
             }))
             setEmployees(formattedData)
         } catch (error) {
-            console.log(error)
-            setError(error.response?.data?.message || 'An error occurred when getting employees')
+            setError(error.response?.data?.error || 'An error occurred when getting employees')
         } finally {
             setIsEmployeesLoading(prev => !prev)
         }
@@ -54,8 +53,8 @@ const ManageUsersPage = () => {
 
     return (
         <Card className="h-full w-full">
-            <CardHeader floated={false} shadow={false} className="rounded-none mb-[1.5rem] md:mb-[2rem]">
-                <div className="mb-[7rem] md:mb-[2rem] md:flex flex-col md:flex-row md:items-center md:justify-between md:gap-8">
+            <CardHeader floated={false} shadow={false} className="rounded-none">
+                <div className="mb-[13.5rem] md:mb-[7rem] md:flex flex-col md:flex-row md:items-center md:justify-between md:gap-8">
                     <div>
                         <Typography variant="h5" color="blue-gray">
                             Employees list
@@ -79,8 +78,8 @@ const ManageUsersPage = () => {
                     </div>
                 ) : (
 
-                    <CardBody className="overflow-scroll px-0">
-                        <table className="mt-4 w-full min-w-max table-auto text-left">
+                    <CardBody className="overflow-scroll px-0 mt-6">
+                        <table className="w-full min-w-max table-auto text-left">
                             <thead>
                                 <tr>
                                     {TABLE_HEAD.map((head, index) => (

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import axios from "../utils/axiosConfig"
 import { Button, Avatar } from "@material-tailwind/react"
 import useAuth from "../hooks/useAuth"
+import { ImSpinner } from "react-icons/im"
 
 const AttendancePage = () => {
     const { auth } = useAuth();
@@ -82,38 +83,49 @@ const AttendancePage = () => {
 
 
     return (
-        <main className="mt-16">
-            <div className="md:w-4/5 md:mx-auto px-4 py-4 md:px-0 md:py-0">
-                <section className="flex items-center space-x-4">
-                    <img className="bg-slate-300 w-40 h-40 rounded-full" src="" alt="Profile image" />
-                    <div className="text-left">
-                        <p className="text-xl font-semibold">{auth?.fullname}</p>
-                        <p className="text-gray-600">{auth?.jobTitle}</p>
-                    </div>
-                </section>
-                <section className="mt-8">
-                    {
-                        checkInHour < openingHour || checkInHour > closingHour ? (
-                            <span className="text-red-500 font-bold">Closed</span>
-                        ) : (
-                            <div className="mt-4 space-x-2">
-                                <button disabled={isCheckInLoading || isCheckedIn} onClick={handleCheckIn} className={`px-4 py-2 rounded ${isCheckInLoading || isCheckedIn ? 'bg-blue-300 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600 text-white'}`}
-                                >
-                                    {isCheckInLoading ? 'Checking in...' : 'Check in'}</button>
-                                <button disabled={isCheckOutLoading || !isCheckedIn || isCheckedOut} onClick={handleCheckOut} className={`px-4 py-2 rounded ${isCheckOutLoading || !isCheckedIn || isCheckedOut ? 'bg-gray-300 cursor-not-allowed' : 'bg-gray-500 hover:bg-gray-600 text-white'}`}
-                                >
-                                    {isCheckOutLoading ? 'Checking out...' : 'Check out'}</button>
-                            </div>
-                        )
-                    }
+        <>
+            {
+                isExistingRecordLoading ? (
+                    <div className="flex justify-center items-center h-60" >
+                        <ImSpinner className="animate-spin w-7 h-7" />
+                    </div >
+                ) : (
+
+                    <main className="mt-16">
+                        <div className="md:w-4/5 md:mx-auto px-4 py-4 md:px-0 md:py-0">
+                            <section className="flex items-center space-x-4">
+                                <img className="bg-slate-300 w-40 h-40 rounded-full" src="" alt="Profile image" />
+                                <div className="text-left">
+                                    <p className="text-xl font-semibold">{auth?.fullname}</p>
+                                    <p className="text-gray-600">{auth?.jobTitle}</p>
+                                </div>
+                            </section>
+                            <section className="mt-8">
+                                {
+                                    checkInHour < openingHour || checkInHour > closingHour ? (
+                                        <span className="text-red-500 font-bold">Closed</span>
+                                    ) : (
+                                        <div className="mt-4 space-x-2">
+                                            <button disabled={isCheckInLoading || isCheckedIn} onClick={handleCheckIn} className={`px-4 py-2 rounded ${isCheckInLoading || isCheckedIn ? 'bg-blue-300 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600 text-white'}`}
+                                            >
+                                                {isCheckInLoading ? 'Checking in...' : 'Check in'}</button>
+                                            <button disabled={isCheckOutLoading || !isCheckedIn || isCheckedOut} onClick={handleCheckOut} className={`px-4 py-2 rounded ${isCheckOutLoading || !isCheckedIn || isCheckedOut ? 'bg-gray-300 cursor-not-allowed' : 'bg-gray-500 hover:bg-gray-600 text-white'}`}
+                                            >
+                                                {isCheckOutLoading ? 'Checking out...' : 'Check out'}</button>
+                                        </div>
+                                    )
+                                }
 
 
-                </section>
-                {error && <p className="text-red-500">{error}</p>}
-                {successMsg && <p className="text-blue-500">{successMsg}</p>}
-                {/* {existingRecordError && <p className="text-red-500">{existingRecordError}</p>} */}
-            </div>
-        </main>
+                            </section>
+                            {error && <p className="text-red-500">{error}</p>}
+                            {successMsg && <p className="text-blue-500">{successMsg}</p>}
+                            {/* {existingRecordError && <p className="text-red-500">{existingRecordError}</p>} */}
+                        </div>
+                    </main>
+                )
+            }
+        </>
 
     )
 }

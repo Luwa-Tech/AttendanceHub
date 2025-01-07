@@ -4,12 +4,15 @@ import { useState, useEffect } from "react"
 import { ImSpinner } from "react-icons/im"
 import axios from "../utils/axiosConfig"
 import NotificationDialog from "../component/MessageModal"
+import {BsFillEyeFill, BsFillEyeSlashFill} from "react-icons/bs"
 
 const ResetPasswordPage = () => {
     const { token } = useParams()
     const [responseMsg, setResponseMsg] = useState("")
     const [msgTitle, setMsgTitle] = useState("Password Reset Success")
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(false)
+    const [newPwd, setNewPwd] = useState(false)
+    const [confirmPwd, setConfirmPwd] = useState(false)
 
     const resetSuccessMsg = "Your password has been successfully reset. You can now log in with your new password."
 
@@ -53,22 +56,28 @@ const ResetPasswordPage = () => {
                 <h1 className="text-[1.3rem] md:text-[1.6rem] mb-6 font-medium leading-normal text-center">Reset Password</h1>
                 <form className="flex flex-col gap-4" onSubmit={handleSubmit(resetPassword)} noValidate>
                     <div className="flex flex-col gap-2 font-normal leading-normal">
-                        <input className="border-[.12rem] border-blue-600 text-[1rem] rounded-[0.25rem] w-full py-2 px-2 outline-none" placeholder="Password" id="newPassword" type="password" {...register("newPassword", {
-                            required: {
-                                value: true,
-                                message: "Password is required"
-                            }
-                        })} />
+                    <div className="flex items-center text-[1rem] border-[.12rem] border-blue-600 rounded-[0.25rem]">
+                            <input placeholder="New Password" className="text-[1rem] w-full py-2 px-2 outline-none" type={newPwd ? "text" : "password"} id="newPassword" {...register("newPassword", {
+                                required: {
+                                    value: true,
+                                    message: "Password is required"
+                                }
+                            })}/>
+                            <span className="px-4 py-2 cursor-pointer" onClick={() => setNewPwd(prev => !prev)}>{newPwd ? <BsFillEyeFill/> : <BsFillEyeSlashFill />}</span>
+                        </div>
 
                         <p className="text-red-700 text-[.8rem]">{errors.password?.message}</p>
                     </div>
                     <div className="flex flex-col gap-2 font-normal leading-normal">
-                        <input className="border-[.12rem] border-blue-600 text-[1rem] w-full py-2 px-2 outline-none rounded-[0.25rem]" placeholder="Confirm Password" id="confirmPassword" type="password" {...register("confirmPassword", {
-                            required: {
-                                value: true,
-                                message: "Password is required"
-                            }
-                        })} />
+                    <div className="flex items-center text-[1rem] border-[.12rem] border-blue-600 rounded-[0.25rem]">
+                            <input placeholder="Confirm Password" className="text-[1rem] w-full py-2 px-2 outline-none" type={confirmPwd ? "text" : "password"} id="confirmPassword" {...register("confirmPassword", {
+                                required: {
+                                    value: true,
+                                    message: "Password is required"
+                                }
+                            })}/>
+                            <span className="px-4 py-2 cursor-pointer" onClick={() => setConfirmPwd(prev => !prev)}>{confirmPwd ? <BsFillEyeFill/> : <BsFillEyeSlashFill />}</span>
+                        </div>
 
                         <p className="text-red-700 text-[.8rem]">{errors.password?.message}</p>
                     </div>

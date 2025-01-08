@@ -23,7 +23,7 @@ const Header = () => {
     const logout = async () => {
         try {
             setIsLogoutLoading(prev => !prev)
-            await axios.post("http://localhost:5001/logout")
+            await axios.post("https://attendancehub.onrender.com/logout")
 
             navigate("/")
         } catch (err) {

@@ -1,6 +1,5 @@
 import 'dotenv/config';
 import 'express-async-errors';
-import ngrok from '@ngrok/ngrok';
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
@@ -34,7 +33,3 @@ mongoose.connection.once("open", () => {
         console.log(`Server is listening on PORT: ${PORT}`);
     })
 });
-
-// for development purposes
-// ngrok.connect({ addr: PORT, authtoken_from_env: true })
-// 	.then(listener => console.log(`Ingress established at: ${listener.url()}`));

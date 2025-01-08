@@ -34,7 +34,7 @@ const ViewAttendancePage = () => {
     const getCurrentDayAttendance = async () => {
         try {
             setIsAttendanceLoading(true);
-            const res = await axios.get("http://localhost:5001/api/v1/attendance/current");
+            const res = await axios.get("https://attendancehub.onrender.com/api/v1/attendance/current");
             setAttendance(res.data);
         } catch (error) {
             console.log(error);
@@ -47,7 +47,7 @@ const ViewAttendancePage = () => {
     const getAttendanceByDate = async (date) => {
         try {
             setIsAttendanceLoading(true);
-            const res = await axios.get("http://localhost:5001/api/v1/attendance/filter-by-date", {
+            const res = await axios.get("https://attendancehub.onrender.com/api/v1/attendance/filter-by-date", {
                 params: { date }
             });
             setAttendance(res.data);

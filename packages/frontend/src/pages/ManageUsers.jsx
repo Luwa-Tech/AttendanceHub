@@ -1,5 +1,4 @@
 import {
-    MagnifyingGlassIcon,
     ChevronUpDownIcon,
 } from "@heroicons/react/24/outline";
 import { PencilIcon, UserPlusIcon } from "@heroicons/react/24/solid";
@@ -31,7 +30,7 @@ const ManageUsersPage = () => {
         try {
             setIsEmployeesLoading(prev => !prev);
 
-            const res = await axios.get("http://localhost:5001/api/v1/employee/get-all-employees");
+            const res = await axios.get("https://attendancehub.onrender.com/api/v1/employee/get-all-employees");
 
             const formattedData = res.data.map(employee => ({
                 name: `${employee.firstname} ${employee.lastname}`,

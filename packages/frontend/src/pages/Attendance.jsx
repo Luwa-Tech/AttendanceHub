@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import axios from "../utils/axiosConfig"
-import { Button, Avatar } from "@material-tailwind/react"
 import useAuth from "../hooks/useAuth"
 import { ImSpinner } from "react-icons/im"
 
@@ -27,7 +26,7 @@ const AttendancePage = () => {
         try {
             setIsCheckInLoading(true);
 
-            const res = await axios.post("http://localhost:5001/api/v1/attendance/check-in");
+            const res = await axios.post("https://attendancehub.onrender.com/api/v1/attendance/check-in");
             setIsCheckedIn(true);
             setSuccessMsg(res.data.message)
         } catch (error) {
@@ -41,7 +40,7 @@ const AttendancePage = () => {
         try {
             setIsCheckOutLoading(true);
 
-            const res = await axios.put("http://localhost:5001/api/v1/attendance/check-out");
+            const res = await axios.put("https://attendancehub.onrender.com/api/v1/attendance/check-out");
             setIsCheckedOut(true);
             setSuccessMsg(res.data?.message);
         } catch (error) {
@@ -56,7 +55,7 @@ const AttendancePage = () => {
         try {
             setIsExistingRecordLoading(true);
 
-            const res = await axios.get("http://localhost:5001/api/v1/attendance/check");
+            const res = await axios.get("https://attendancehub.onrender.com/api/v1/attendance/check");
 
             if (res.data.checkInTime && !res.data.checkOuTime) {
                 setIsCheckedIn(true);

@@ -89,8 +89,7 @@ export class AuthController {
         findEmployee.resetPasswordExpires = Date.now() + 15 * 60 * 1000; // 15 minutes expiration time
         await findEmployee.save();
 
-        // Add client domain
-        const resetLink = `http://your-client-domain.com/reset/${token}`;
+        const resetLink = `${process.env.CLIENT_URL}/${token}`;
 
         const template = passwordResetEmail(findEmployee, resetLink);
 
@@ -99,17 +98,17 @@ export class AuthController {
         res.status(200).send('Password reset email sent');
     }
 
-    redirectToResetPasswordPage = async (req, res) => {
-        const resetInfo = {
-            resetPasswordToken: req.params.token,
-            resetPasswordExpires: { $gt: Date.now() }
-        };
+    // redirectToResetPasswordPage = async (req, res) => {
+    //     const resetInfo = {
+    //         resetPasswordToken: req.params.token,
+    //         resetPasswordExpires: { $gt: Date.now() }
+    //     };
 
-        await this.employeeService.checkResetTokenExpiration(resetInfo);
+    //     await this.employeeService.checkResetTokenExpiration(resetInfo);
 
-        // redirect to client reset page
-        res.redirect('', { token: req.params.token });
-    }
+    //     // redirect to client reset page
+    //     res.redirect('', { token: req.params.token });
+    // }
 
     resetPassword = async (req, res) => {
         const resetInfo = {

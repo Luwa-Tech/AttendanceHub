@@ -24,8 +24,7 @@ const ForgotPasswordPage = () => {
 
     const initPasswordReset = async (data) => {
         try {
-            // Change to Production API URL
-            const response = await axios.post("http://localhost:5001/generate-reset-token", {
+            const response = await axios.post("https://attendancehub.onrender.com/generate-reset-token", {
                 id: data.ID
             })
             

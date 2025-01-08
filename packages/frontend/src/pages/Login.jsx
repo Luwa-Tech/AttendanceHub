@@ -6,14 +6,6 @@ import { useState, useEffect } from "react"
 import useAuth from "../hooks/useAuth"
 import {BsFillEyeFill, BsFillEyeSlashFill} from "react-icons/bs"
 
-/*
-
-    TODO:
-        - write auth pages logic
-        - write attendance logic
-        - write dashboard logic and data
- */
-
 const LoginPage = () => {
     const { setAuth} = useAuth()
     const [error, setError] = useState("")
@@ -29,8 +21,7 @@ const LoginPage = () => {
 
     const login = async (data) => {
         try {
-            // change url to prod-url during deployment
-            const response = await axios.post("http://localhost:5001/login", {
+            const response = await axios.post("https://attendancehub.onrender.com/login", {
                 id: data.ID,
                 password: data.password
             });

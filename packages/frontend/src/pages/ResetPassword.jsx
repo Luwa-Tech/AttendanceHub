@@ -28,8 +28,7 @@ const ResetPasswordPage = () => {
 
     const resetPassword = async (data) => {
         try {
-            // Add Prod API URL -> Example: //`https://talentbridge.onrender.com/api/user/reset-password-with-token?token=${token}`
-            const response = await axios.post("http://localhost:5001/", {
+            const response = await axios.post(`https://attendancehub.onrender.com/reset-password/token=${token}`, {
                 newPassword: data.newPassword,
                 confirmPassword: data.confirmPassword
             })

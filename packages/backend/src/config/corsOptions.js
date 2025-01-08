@@ -1,4 +1,4 @@
-const allowedOrigins = ['http://localhost:5173'];
+const allowedOrigins = ['http://localhost:5173', 'https://attendancehub-client.netlify.app'];
 
 export const corsOptions = {
     origin: (origin, callback) => {

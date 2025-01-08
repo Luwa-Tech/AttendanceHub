@@ -1,11 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 import withMT from "@material-tailwind/react/utils/withMT"
-// import colors from "tailwindcss/colors"
 
 export default withMT({
   content: [
     "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{vue,js,ts,jsx,tsx}",
+    "../../packages/*/src/**/*.{vue,js,ts,jsx,tsx}",
+    "../../node_modules/@material-tailwind/react/components/**/*.{js,ts,jsx,tsx}",
+    "../../node_modules/@material-tailwind/react/theme/components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -24,7 +26,6 @@ export default withMT({
         button: {
           400: "#1E1E1E"
         },
-
       },
     },
   },

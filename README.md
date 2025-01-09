@@ -65,7 +65,7 @@ password: johndoe
 1. Clone the repository:
 
 ```sh
-git clone https://github.com/your-username/attendancehub.git
+git clone https://github.com/Luwa-Tech/AttendanceHub.git
 cd attendancehub
 ```
 2. Install dependencies:

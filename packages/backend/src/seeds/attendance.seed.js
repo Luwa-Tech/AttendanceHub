@@ -40,7 +40,7 @@ const generateRandomAttendance = (employeeId, startDate, endDate, status) => {
 const seedAttendance = async () => {
     try {
         const startDate = '2024-12-01';
-        const endDate = '2025-01-04';
+        const endDate = '2025-01-09';
 
         const status = await Status.find();
         const employees = await Employee.find();

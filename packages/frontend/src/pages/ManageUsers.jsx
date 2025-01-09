@@ -53,7 +53,7 @@ const ManageUsersPage = () => {
     return (
         <Card className="h-full w-full">
             <CardHeader floated={false} shadow={false} className="rounded-none">
-                <div className="mb-[13.5rem] md:mb-[7rem] md:flex flex-col md:flex-row md:items-center md:justify-between md:gap-8">
+                <div className="mb-[17.5rem] md:mb-[9rem] md:flex flex-col md:flex-row md:items-center md:justify-between md:gap-8">
                     <div>
                         <Typography variant="h5" color="blue-gray">
                             Employees list
@@ -77,7 +77,7 @@ const ManageUsersPage = () => {
                     </div>
                 ) : (
 
-                    <CardBody className="overflow-scroll px-0 mt-6">
+                    <CardBody className="overflow-scroll px-0 mt-4">
                         <table className="w-full min-w-max table-auto text-left">
                             <thead>
                                 <tr>

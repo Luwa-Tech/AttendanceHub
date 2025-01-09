@@ -72,7 +72,7 @@ const ViewAttendancePage = () => {
     return (
         <Card className="h-full w-full">
             <CardHeader floated={false} shadow={false} className="rounded-none">
-                <div className="mb-[7rem] md:mb-[7rem] md:flex flex-col md:flex-row md:items-center md:justify-between md:gap-8">
+                <div className="mb-[22rem] md:mb-[9rem] md:flex flex-col md:flex-row md:items-center md:justify-between md:gap-8">
                     <div>
                         <Typography variant="h5" color="blue-gray">
                             Attendance List
@@ -82,12 +82,14 @@ const ViewAttendancePage = () => {
                         </Typography>
                     </div>
                     <div className="flex md:items-center items-left flex-col md:flex-row gap-4">
+                        <div className="w-[2rem] md:w-auto">
                         <Input
                             type="date"
                             value={filterDate}
                             onChange={(e) => setFilterDate(e.target.value)}
-                            className="border-2 p-2 rounded md:w-[2rem]"
+                            variant="outlined"
                         />
+                        </div>
                         <Button className="bg-button-400 text-center w-[4.5rem]" size="sm" onClick={handleFilter}>
                             Filter
                         </Button>
@@ -102,7 +104,7 @@ const ViewAttendancePage = () => {
                     </div>
                 ) : (
 
-                    <CardBody className="overflow-scroll mt-6 px-0">
+                    <CardBody className="overflow-scroll mt-4 px-0">
                         {
                             attendance.length === 0 ? (
                                 <div className="flex justify-center items-center h-64">

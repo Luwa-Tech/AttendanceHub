@@ -10,7 +10,7 @@ export const onboardEmail = (result, pwd) => {
         <body>
             <p>Dear ${result.firstname},</p>
     
-            <p>Congratulations and welcome to <strong>BP Refinery</strong>! We are thrilled to have you join our Company as a <strong>${result.jobRole}</strong>.</p>
+            <p>Congratulations and welcome to <strong>BP Refinery</strong>! We are thrilled to have you join our Company as a <strong>${result.jobTitle}</strong>.</p>
     
             <p>To get you started, here are your login details:</p>
             <ul>
@@ -18,14 +18,7 @@ export const onboardEmail = (result, pwd) => {
                 <li><strong>Temporary Password</strong>: ${pwd}</li>
             </ul>
     
-            <p>Please use these credentials to log in to our employee portal at <a href="[ADD CLIENT URL HERE]">[ADD CLIENT URL NAME HERE]</a>. For security reasons, it is compulsory that you change your password as soon as you log in. This will help protect your account and ensure your personal information remains secure.</p>
-    
-            <p>To change your password, follow these steps:</p>
-            <ol>
-                <li>Log in to the employee portal using the temporary password provided.</li>
-                <li>Navigate to the "Account Settings" or "Profile" section.</li>
-                <li>Select "Change Password" and follow the prompts to set a new password.</li>
-            </ol>
+            <p>Please use these credentials to log in to our employee portal at <a href="https://attendancehub-client.onrender.com">BP Refinery</a>. For security reasons, it is compulsory that you change your password as soon as you log in. This will help protect your account and ensure your personal information remains secure.</p>
     
             <p>Once again, welcome! We look forward to working with you and achieving great things together.</p>
     

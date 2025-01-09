@@ -42,7 +42,7 @@ const RegisterUserModal = ({ open, handleOpen, getEmployees, setOpen }) => {
     try {
       setIsAddNewUserLoading(prev => !prev)
 
-      const res = await axios.post("http://localhost:5001/register", {
+      const res = await axios.post("https://attendancehub.onrender.com/register", {
         firstname: data.firstname,
         lastname: data.lastname,
         email: data.email,
@@ -68,12 +68,12 @@ const RegisterUserModal = ({ open, handleOpen, getEmployees, setOpen }) => {
     <Dialog
       open={open}
       handler={handleOpen}
-      size="lg"
-      className="fixed inset-0 flex items-center flex-col justify-center bg-black bg-opacity-50 shadow-none"
+      size="sm"
+      className="flex items-center justify-center flex-col"
     >
-      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
+      
         <DialogHeader>Register New Employee</DialogHeader>
-        <DialogBody>
+        <DialogBody className="w-[100%]">
           <form onSubmit={handleSubmit(addNewEmployee)} noValidate>
             <div className="mb-4">
               <Typography variant="small" color="gray">First Name</Typography>
@@ -144,7 +144,7 @@ const RegisterUserModal = ({ open, handleOpen, getEmployees, setOpen }) => {
             </DialogFooter>
           </form>
         </DialogBody>
-      </div>
+      
     </Dialog>
 
   )

@@ -37,7 +37,16 @@ const employeeSchema  = new mongoose.Schema({
         type: String,
         required: true,
         unique: true
+    },
+
+    resetPasswordToken: {
+        type: String
+    },
+    
+    resetPasswordExpires: {
+        type: Date
     }
+
 }, {timestamps: true});
 
 const Employee = mongoose.model('Employee', employeeSchema);

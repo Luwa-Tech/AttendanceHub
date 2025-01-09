@@ -45,7 +45,7 @@ const Header = () => {
                         <RxHamburgerMenu onClick={mobileNavToggle} className="md:hidden w-8 h-8 z-[25]" />
                     )
                 }
-                <nav className={`bg-[#b3b3ca] text-button-400 md:text-button-400 md:bg-transparent flex flex-col md:flex-row gap-8 md:gap-0 md:justify-end items-center md:w-full fixed md:static pt-20 md:pt-0 transition-all duration-[0.15s] mobile-nav ease-in md:z-auto z-[20] ${toggle ? "right-0" : "right-[-100%]"}`}>
+                <nav className={`bg-[#e7eaec] text-button-400 md:text-button-400 md:bg-transparent flex flex-col md:flex-row gap-8 md:gap-0 md:justify-end items-center md:w-full fixed md:static pt-20 md:pt-0 transition-all duration-[0.15s] mobile-nav ease-in md:z-auto z-[20] ${toggle ? "right-0" : "right-[-100%]"}`}>
 
                     <ul className="flex flex-col gap-4 md:gap-4 md:flex-row items-center">
                         {

@@ -28,7 +28,7 @@ const ResetPasswordPage = () => {
 
     const resetPassword = async (data) => {
         try {
-            const response = await axios.post(`https://attendancehub.onrender.com/reset-password/token=${token}`, {
+            const response = await axios.post(`https://attendancehub.onrender.com/reset-password/${token}`, {
                 newPassword: data.newPassword,
                 confirmPassword: data.confirmPassword
             })

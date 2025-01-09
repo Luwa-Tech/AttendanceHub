@@ -98,22 +98,11 @@ export class AuthController {
         res.status(200).send('Password reset email sent');
     }
 
-    // redirectToResetPasswordPage = async (req, res) => {
-    //     const resetInfo = {
-    //         resetPasswordToken: req.params.token,
-    //         resetPasswordExpires: { $gt: Date.now() }
-    //     };
-
-    //     await this.employeeService.checkResetTokenExpiration(resetInfo);
-
-    //     // redirect to client reset page
-    //     res.redirect('', { token: req.params.token });
-    // }
-
     resetPassword = async (req, res) => {
+        const token = req.params.token;
         const resetInfo = {
-            resetPasswordToken: req.params.token,
-            resetPasswordExpires: { $gt: Date.now() }
+            resetPasswordToken: token,
+            resetPasswordExpires: { $gt: new Date() }
         };
 
         const result = await this.employeeService.checkResetTokenExpiration(resetInfo);
@@ -124,7 +113,7 @@ export class AuthController {
             throw new InputError('Passwords do not match');
         }
 
-        const hashedPwd = bcrypt.hash(data.newPassword, 10);
+        const hashedPwd = await bcrypt.hash(data.newPassword, 10);
         result.password = hashedPwd;
         result.resetPasswordToken = undefined;
         result.resetPasswordExpires = undefined;

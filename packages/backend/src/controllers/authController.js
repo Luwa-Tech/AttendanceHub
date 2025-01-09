@@ -69,7 +69,7 @@ export class AuthController {
 
         const token = jwt.sign({ id: findEmployee._id, employeeId: findEmployee.employeeId, roleId: findEmployee.roleId }, process.env.ACCESS_KEY);
 
-        res.cookie('access_token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'none', path: '/', domain: `${process.env.CLIENT_URL}` }).status(200).json({ 'message': 'Employee logged in', employee });
+        res.cookie('access_token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'none', path: '/'}).status(200).json({ 'message': 'Employee logged in', employee });
     }
 
     // Implement changePassword controller

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "concurrently --kill-others-on-fail \"yarn backend\"  \"yarn frontend\"",
     "backend:seed": "yarn workspace backend seed",
-    "backend": "yarn workspace backend backend:dev",
+    "backend": "yarn workspace backend dev",
     "frontend": "yarn workspace frontend dev"
   },
   "keywords": [],
